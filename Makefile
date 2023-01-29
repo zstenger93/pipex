@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/01/29 18:44:01 by zstenger         ###   ########.fr        #
+#    Updated: 2023/01/29 19:04:10 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,25 @@ $(NAME): $(LIBFT) $(OBJS)
 	@echo "\x1B[1;36m"
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) $(LIBFT)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
+	@echo "\x1B[36m ██▓███▒░░▒██▒░ ██▓███▒░██████▒░▒██▒░▒██▒░"
+	@echo "▓██▒░░██▒░▒██▒░▓██▒░░██▒██▒░░░░░░▒██░██▒░"
+	@echo "▓██▒░██▓▒░▒██▒░▓██▒░██▓▒████▒░░░░░▒███▒░"
+	@echo "▒██▄█▓▒ ▒░▒██▒░▒██▄█▓▒ ▒██▒░░░░░░▒██░██▒░"
+	@echo "▒██▒ ░  ░░▒██▒░▒██▒ ░  ░██████▒░▒██▒░▒██▒░"
+	@echo "▒▓▒░ ░  ░░▒▓▓▒░▒▓▒░ ░ ░░░▒▓▓▓▓▒░ ▒▓▓▒ ▒▓▓▒"
+	@echo "░▒ ░      ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+	@echo "░░         ░░  ░░      ░   ░░     ░░   ░"
+	@echo "░          ░   ░            ░     ░"
 
 $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Bonus part By:$(DEF_COLOR) $(RED)zstenger $(DEF_COLOR)"
 	@echo "\x1B[1;36m"
 	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRCS) $(LIBFT)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Bonus compiling done.$(DEF_COLOR)"
+
+%.o : %.c
+	@echo "\x1B[1;36m"
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "$(RED)Deleting objects.$(DEF_COLOR)"
