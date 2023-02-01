@@ -13,9 +13,8 @@ by using it in your program.</i></b><br>
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/zstenger93/pipex?color=green" />
 </p>
 <h2>fork()</h2>
-<p>If you call fork() once:</p>
 
-_FYI:_
+_If you call fork() once:_
 
 	|-----------|
 	|  parent   |
@@ -26,9 +25,7 @@ _FYI:_
 	|   child   |
 	|___________|
 
-<p>If you call fork() twice:</p>
-
-_FYI:_
+_If you call fork() twice:_
 
 	|-----------|
 	|  parent   |-------------->|
@@ -44,9 +41,7 @@ _FYI:_
 	|   child   |       
 	|___________|
 
-<p>If you call fork() 3 times:</p>
-
-_FYI:_
+_If you call fork() 3 times:_
 
 	|-----------|       |-----------|
 	|   child   |<------|  parent   |---------->|
