@@ -13,7 +13,9 @@ by using it in your program.</i></b><br>
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/zstenger93/pipex?color=green" />
 </p>
 <h2>fork()</h2>
-```
+
+_FYI:_
+
 |-----------|
 |	parent	|-------------->|
 |___________|				|
@@ -27,7 +29,7 @@ by using it in your program.</i></b><br>
 	|-----------|
 	|grandchild |
 	|___________|
-```
+
 
 <div align=center>
 
