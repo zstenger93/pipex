@@ -63,7 +63,7 @@ _If you call fork() 3 times:_
 	                    |-----------|
 	                    |  child_7  |
 	                    |___________|
-
+</p>
 <div align=center>
 
 ### 📋 How pipes work:
