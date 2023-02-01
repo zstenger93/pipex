@@ -12,8 +12,9 @@ by using it in your program.</i></b><br>
 	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/zstenger93/pipex?color=blue" />
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/zstenger93/pipex?color=green" />
 </p>
-<p align=center>open, close, read, write, malloc, free, perror, strerror, access,</p>
-<p align=center>dup, dup2, execve, exit, fork, pipe, unlink, wait, waitpid</p>
+<h2 align=center>Allowed functions</h2>
+<p align=center>open, close, read, write, malloc, free, perror, strerror, access, dup,</p>
+<p align=center>dup2, execve, exit, fork, pipe, unlink, wait, waitpid, ft_printf</p>
 <h2 align=center>fork()</h2>
 <p align=center>It's creating a new process, which is called child process, which runs concurrently with the process that makes the fork() call (parent process).</p>
 <p align=center>After a new child process is created, both processes will execute the next instruction following the fork() system call. A child process uses the same pc(program counter), same CPU registers, same open files which use in the parent process.</p>
