@@ -12,7 +12,9 @@ by using it in your program.</i></b><br>
 	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/zstenger93/pipex?color=blue" />
 	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/zstenger93/pipex?color=green" />
 </p>
-<h2>fork()</h2>
+<h2 align=center>fork()</h2>
+<p align=center>
+
 
 _If you call fork() once:_
 
@@ -22,7 +24,7 @@ _If you call fork() once:_
 		|
 		|
 	|-----------|
-	|   child   |
+	|  child_1  |
 	|___________|
 
 _If you call fork() twice:_
@@ -33,33 +35,33 @@ _If you call fork() twice:_
 		|                   |
 		|                   |
 	|-----------|       |-----------|
-	|   child   |       |   child   |
+	|  child_1  |       |  child_2  |
 	|___________|       |___________|
 		|
 		|
 	|-----------|
-	|   child   |       
+	|  child_3  |       
 	|___________|
 
 _If you call fork() 3 times:_
 
 	|-----------|       |-----------|
-	|   child   |<------|  parent   |---------->|
+	|  child_4  |<------|  parent   |---------->|
 	|___________|       |___________|           |
 	                    	|                   |
 	                    	|                   |
 	|-----------|       |-----------|       |-----------|       |-----------|
-	|   child   |<------|   child   |       |   child   |------>|   child   |
+	|  child_5  |<------|  child_1  |       |  child_2  |------>|  child_6  |
 	|___________|       |___________|       |___________|       |___________|
 	                    	|
 	                    	|
 	                    |-----------|
-	                    |   child   |
+	                    |  child_3  |
 	                    |___________|
 	                    	|
 	                    	|
 	                    |-----------|
-	                    |   child   |
+	                    |  child_7  |
 	                    |___________|
 
 <div align=center>
