@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/03 18:25:37 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:09:46 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	input_process(int *fd, char *infile, char *command, char **env)
 	int		infile_fd;
 	pid_t	process_id;
 
-	if ((process_id = fork()) == -1)
+	process_id = fork();
+	if (process_id == -1)
 		error_type(FORK_ERROR);
 	if (process_id == 0)
 	{
@@ -67,7 +68,8 @@ void	output_process(int *fd, char *command, char *outfile, char **env)
 	int		outfile_fd;
 	pid_t	process_id;
 
-	if ((process_id = fork()) == -1)
+	process_id = fork();
+	if (process_id == -1)
 		error_type(FORK_ERROR);
 	if (process_id == 0)
 	{
@@ -89,26 +91,4 @@ void	wait_for_child_process(void)
 	process_id = waitpid(0, &status, 0);
 	while (process_id != -1)
 		process_id = waitpid(0, &status, 0);
-}
-
-/*
-open R only, if doesnt exist open it with read and write permissions
-open WR only, created if doesnt exist and new data should be appended to the
-end of file open WR only, created if doesnt exist and its content should be
-removed if open return -1 print the error specified in errno
-*/
-int	open_file(int fd, char *file)
-{
-	int	file_fd;
-
-	file_fd = -2;
-	if (fd == 0)
-		file_fd = open(file, O_RDONLY, GIVE_PERM_WTH_RW);
-	else if (fd == 1)
-		file_fd = open(file, O_WRONLY | O_CREAT | O_APPEND, GIVE_PERM_WTH_RW);
-	else if (fd == 2)
-		file_fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW);
-	if (file_fd == -1)
-		perror("open failed");
-	return (file_fd);
 }
