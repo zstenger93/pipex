@@ -6,27 +6,28 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/01/29 19:04:10 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/03 16:59:14 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 BONUS_NAME = pipex_bonus
-CC = cc
+CC = gcc
 RM = rm -rf
 LIBFT = libft/libft.a
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS =
+# -Wall -Werror -Wextra
 
-SRC = src/pipex.c \
-		src/utils.c \
-		src/error.c \
-		src/argv_check.c\
+SRC = src/pipex.c
+# src/utils.c \
+# src/error.c \
+# src/argv_check.c\
 
 BONUS_SRC = 
 
-OBJS = $(SRCS:.c=.0)
+OBJS = $(SRC:.c=.o)
 
-BONUS_OBJS  =$(BONUS_SRCS:.c=.o)
+BONUS_OBJS  =$(BONUS_SRC:.c=.o)
 
 DEF_COLOR = \033[0;39m
 RED = \033[1;4;91m
@@ -44,7 +45,7 @@ bonus: $(BONUS_NAME)
 $(NAME): $(LIBFT) $(OBJS)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger $(DEF_COLOR)"
 	@echo "\x1B[1;36m"
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(LIBFT)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
 	@echo "\x1B[36m ██▓███▒░░▒██▒░ ██▓███▒░██████▒░▒██▒░▒██▒░"
 	@echo "▓██▒░░██▒░▒██▒░▓██▒░░██▒██▒░░░░░░▒██░██▒░"
@@ -65,6 +66,13 @@ $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
 %.o : %.c
 	@echo "\x1B[1;36m"
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIBFT):
+	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)LIBFT. $(DEF_COLOR)"
+	@echo "\x1B[1;36m"
+	git submodule update --init --recursive --remote
+	make -C ./libft
+	@echo "$(PURPLE)LIBFT $(DEF_COLOR)$(GREEN)has been compiled.$(DEF_COLOR)"
 
 clean:
 	@echo "$(RED)Deleting objects.$(DEF_COLOR)"
