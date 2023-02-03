@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/03 18:54:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:36:01 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_type(int error_id)
 {
 	if (error_id == WRONG_INPUT)
-		ft_putstr_fd("WRONG NUMBER OF ARGUMENTS!\n", 2);
+		ft_putstr_fd("Wrong number of arguments!\n", 2);
 	else if (error_id == PIPE_ERROR)
 		perror("pipe error");
 	else if (error_id == FORK_ERROR)
