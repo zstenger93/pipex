@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/02/03 16:59:14 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/03 18:27:46 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,12 @@ LIBFT = libft/libft.a
 CFLAGS =
 # -Wall -Werror -Wextra
 
-SRC = src/pipex.c
-# src/utils.c \
-# src/error.c \
-# src/argv_check.c\
+SRC = src/pipex.c \
+		src/path.c \
+		src/utils.c \
+		src/errors.c \
+		src/argv_check.c \
+		src/execute_command.c
 
 BONUS_SRC = 
 

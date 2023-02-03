@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/03 16:52:26 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:25:37 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,6 @@ int	main(int argc, char **argv, char **env)
 		error_type(WRONG_INPUT);
 	pipex(argv, env);
 	exit(0);
-}
-
-//check arg amount and if the commands are valid or not
-void	input_check(int argc, char **argv, char **env)
-{
-	if (argc != 5)
-		error_type(WRONG_INPUT);
-	else
-	{
-		//???
-		//check for valid commands on argv[2] and argv[4]
-		// error_type(INVALID_COMMAND);
-	}
-}
-
-void	error_type(int error_id)
-{
-	if (error_id == WRONG_INPUT)
-		ft_putstr_fd("WRONG NUMBER OF ARGUMENTS!", 2);
-	else if (error_id == PIPE_ERROR)
-		ft_putstr_fd("PIPE FAILED", 2);
-	// else if (error_id == CHILD_ERROR)
-	// 	ft_putstr_fd("CHILD CREATION FAILED", 2);
-	else if (error_id == FORK_ERROR)
-	{
-		perror("fork failed");
-		exit(EXIT_FAILURE);
-	}
-	else if (error_id == INVALID_COMMAND)
-	{
-		perror("invalid command");
-		exit(EXIT_FAILURE);
-	}
-	exit(error_id);
 }
 
 /*
@@ -123,15 +89,13 @@ void	wait_for_child_process(void)
 	process_id = waitpid(0, &status, 0);
 	while (process_id != -1)
 		process_id = waitpid(0, &status, 0);
-	// if (process_id == -1)
-	// 	error_type(CHILD_ERROR);
 }
 
 /*
 open R only, if doesnt exist open it with read and write permissions
-open WR only, created if doesnt exist and new data should be appended to the end of file
-open WR only, created if doesnt exist and its content should be removed
-if open return -1 print the error specified in errno
+open WR only, created if doesnt exist and new data should be appended to the
+end of file open WR only, created if doesnt exist and its content should be
+removed if open return -1 print the error specified in errno
 */
 int	open_file(int fd, char *file)
 {
@@ -147,72 +111,4 @@ int	open_file(int fd, char *file)
 	if (file_fd == -1)
 		perror("open failed");
 	return (file_fd);
-}
-
-char	*get_env(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i] != NULL)
-	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-			return (env[i] + 5);
-		i++;
-	}
-	return (NULL);
-}
-
-char	*get_path(char *env_path, char *command)
-{
-	int		i;
-	char	*path;
-	char	**paths;
-	char	*slash_cmd;
-
-	i = 0;
-	paths = ft_split(env_path, ':');
-	while (paths != NULL)
-	{
-		slash_cmd = ft_nm_strjoin("/", command);
-		path = ft_nm_strjoin(paths[i], slash_cmd);
-		if (path == NULL)
-			return (NULL);
-		free(slash_cmd);
-		if (access(path, X_OK) == 0)
-			return (path);
-		i++;
-		free(path);
-	}
-	return (NULL);
-}
-
-int	path_check(char *cmd_path)
-{
-	if (cmd_path[0] == '/' && access(cmd_path, X_OK) == 0)
-		return (1);
-	return (0);
-}
-
-void	execute_command(char *command, char **env)
-{
-	char	**commands;
-	char	*cmd_path;
-	char	*env_path;
-
-	commands = ft_split(command, ' ');
-	if (path_check(commands[0]))
-	{
-		cmd_path = commands[0];
-		execve(cmd_path, commands, env);
-	}
-	else
-	{
-		env_path = get_env(env);
-		cmd_path = get_path(env_path, commands[0]);
-		if (cmd_path == NULL)
-			error_type(INVALID_COMMAND);
-		else if (execve(cmd_path, commands, env) != -1)
-			exit(-1);
-	}
 }
