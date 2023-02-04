@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 15:43:26 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:55:51 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ void	cmd_error(int error_id, char *command)
 	if (error_id == INVALID_COMMAND)
 	{
 		ft_printf("./pipex: command not found: %s\n", command);
-		// free(command);
+		close(0);
 	}
 	else if (error_id == 42)
 		free_array((void **)command);
-	free(command);
 }
 
 int	cmd_validator(char *command, char **env)
@@ -42,24 +41,14 @@ int	cmd_validator(char *command, char **env)
 	char	*env_path;
 
 	commands = ft_split(command, ' ');
-	if (path_check(commands[0]) == 1)
-		return (0);
-	else
+	env_path = get_env(env);
+	cmd_path = get_path(env_path, commands[0]);
+	if (cmd_path == NULL || path_check(cmd_path) == 1)
 	{
-		env_path = get_env(env);
-		cmd_path = get_path(env_path, commands[0]);
-		if (cmd_path == NULL)
-		{
-			free_array((void **)commands);
-			return (1);
-		}	
-		else if (access(cmd_path, X_OK) == 1)
-		{
-			free_array((void **)commands);
-			return (1);
-		}
-		free(cmd_path);
+		free_array((void **)commands);
+		return (1);
 	}
+	free(cmd_path);
 	free_array((void **)commands);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 15:28:53 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:50:02 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 void	error_type(int error_id);
 void	cmd_error(int error_id, char *command);
 int		cmd_validator(char *command, char **env);
-void	input_check(char **argv, char **env);
+int	input_check(char **argv, char **env);
 
 void	pipex(char **argv, char **env);
 void	input_process(int *fd, char **argv, char **env);

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:24:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 15:29:04 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:48:03 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,14 @@ void	execute_command(char *command, char **env)
 	char	*env_path;
 
 	commands = ft_split(command, ' ');
-	if (path_check(commands[0]))
+	env_path = get_env(env);
+	cmd_path = get_path(env_path, commands[0]);
+	if (path_check(cmd_path) == 1 || cmd_path == NULL)
 	{
-		cmd_path = commands[0];
-		execve(cmd_path, commands, env);
+		free_array((void **)commands);
+		cmd_error(INVALID_COMMAND, command);
 	}
-	else
-	{
-		env_path = get_env(env);
-		cmd_path = get_path(env_path, commands[0]);
-		if (cmd_path == NULL)
-			free_array((void **)commands);
-		else if (execve(cmd_path, commands, env) != -1)
-			exit(-1);
-	}
-	free(commands);
+	execve(cmd_path, commands, env);
 }
 
 /*
@@ -58,8 +51,6 @@ int	open_file(int fd, char *file)
 	{
 		error = strerror(errno);
 		ft_printf("./pipex: %s: %s\n", error, file);
-		close(0);
-		close(1);
 		exit(1);
 	}
 	return (file_fd);
