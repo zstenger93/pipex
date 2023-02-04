@@ -1,9 +1,0 @@
-total 120
--rw-r--r--    1 zstenger  2022_heilbronn   3910 Feb  4 09:55 Makefile
--rw-r--r--    1 zstenger  2022_heilbronn   3864 Feb  3 10:06 README.md
-drwxr-xr-x    3 zstenger  2022_heilbronn    102 Jan 29 18:23 include
-drwxr-xr-x  135 zstenger  2022_heilbronn   4590 Feb  4 13:40 libft
--rw-r--r--    1 zstenger  2022_heilbronn      0 Feb  4 15:43 out
--rwxr-xr-x    1 zstenger  2022_heilbronn  51680 Feb  4 15:43 pipex
-drwxr-xr-x    3 zstenger  2022_heilbronn    102 Feb  4 12:50 pipex.dSYM
-drwxr-xr-x   15 zstenger  2022_heilbronn    510 Feb  4 15:43 src
