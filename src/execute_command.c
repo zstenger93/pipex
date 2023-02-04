@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:24:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/03 19:09:53 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:41:35 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,23 @@ open WR only, created if doesnt exist and new data should be appended to the
 end of file open WR only, created if doesnt exist and its content should be
 removed if open return -1 print the error specified in errno
 */
-int	open_file(int fd, char *file)
+int	open_file(int fd, char *file, char **argv)
 {
-	int	file_fd;
+	int		file_fd;
+	char	*error;
 
 	file_fd = -2;
 	if (fd == 0)
-		file_fd = open(file, O_RDONLY, GIVE_PERM_WTH_RW);
+		file_fd = open(file, O_RDONLY);
 	else if (fd == 1)
 		file_fd = open(file, O_WRONLY | O_CREAT | O_APPEND, GIVE_PERM_WTH_RW);
 	else if (fd == 2)
 		file_fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW);
 	if (file_fd == -1)
-		perror("open failed");
+	{
+		error = strerror(errno);
+		ft_printf("%s: %s: %s\n", argv[0], error, file);
+		close_and_exit_with_error(0, 1);
+	}
 	return (file_fd);
 }

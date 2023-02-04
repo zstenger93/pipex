@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/03 19:09:46 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:01:13 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	if (argc != 5)
-		error_type(WRONG_INPUT);
+	input_check(argc, argv, env);
 	pipex(argv, env);
 	exit(0);
 }
