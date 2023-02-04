@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:24:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 09:41:35 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:46:24 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ open WR only, created if doesnt exist and new data should be appended to the
 end of file open WR only, created if doesnt exist and its content should be
 removed if open return -1 print the error specified in errno
 */
-int	open_file(int fd, char *file, char **argv)
+int	open_file(int fd, char *file)
 {
 	int		file_fd;
 	char	*error;
@@ -56,8 +56,10 @@ int	open_file(int fd, char *file, char **argv)
 	if (file_fd == -1)
 	{
 		error = strerror(errno);
-		ft_printf("%s: %s: %s\n", argv[0], error, file);
-		close_and_exit_with_error(0, 1);
+		ft_printf("./pipex: %s: %s\n", error, file);
+		close(0);
+		close(1);
+		exit(1);
 	}
 	return (file_fd);
 }

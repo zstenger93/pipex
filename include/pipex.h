@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 09:39:14 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:45:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*get_path(char *env_path, char *command);
 int		path_check(char *cmd_path);
 void	execute_command(char *command, char **env);
 
-int		open_file(int fd, char *file, char **argv);
+int		open_file(int fd, char *file);
 void	input_check(int argc, char **argv, char **env);
 void	close_and_exit_with_error(int infile_fd, int outfile_fd);
 
