@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 11:18:58 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 15:28:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	execute_command(char *command, char **env);
 
 int		open_file(int fd, char *file);
 void	close_and_exit_with_error(int infile_fd, int outfile_fd);
-
-
-
+void	free_array(void **array);
 
 #endif

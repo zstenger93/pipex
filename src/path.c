@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:23:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/03 18:24:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 15:29:36 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,14 @@ char	*get_path(char *env_path, char *command)
 			return (NULL);
 		free(slash_cmd);
 		if (access(path, X_OK) == 0)
+		{
+			free_array((void **)paths);
 			return (path);
+		}
 		i++;
 		free(path);
 	}
+	free_array((void **)paths);
 	return (NULL);
 }
 

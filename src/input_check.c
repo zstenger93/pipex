@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 12:02:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 14:38:15 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	input_check(char **argv, char **env)
 {
-	int	infile_fd;
-	int	outfile_fd;
+	int		infile_fd;
+	int		outfile_fd;
 	char	*error;
 
 	if (cmd_validator(argv[2], env) == 1)
@@ -26,6 +26,8 @@ void	input_check(char **argv, char **env)
 	{
 		error = strerror(errno);
 		ft_printf("%s: %s: %s\n", argv[0], error, argv[4]);
+		free(argv[2]);
+		free(argv[3]);
 	}
 	close(infile_fd);
 	close(outfile_fd);
