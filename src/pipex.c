@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 09:45:58 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:10:25 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	input_check(argc, argv, env);
+	if (argc != 5)
+		error_type(WRONG_INPUT);
 	pipex(argv, env);
 	exit(0);
 }
@@ -31,8 +32,8 @@ void	pipex(char **argv, char **env)
 
 	if (pipe(filedescriptor) == -1)
 		error_type(PIPE_ERROR);
-	input_process(filedescriptor, argv[1], argv[2], env);
-	output_process(filedescriptor, argv[3], argv[4], env);
+	input_process(filedescriptor, argv, env);
+	output_process(filedescriptor, argv, env);
 	close(filedescriptor[0]);
 	close(filedescriptor[1]);
 	wait_for_child_process();
@@ -42,43 +43,48 @@ void	pipex(char **argv, char **env)
 fork(), if it fails return the error and exit
 
 */
-void	input_process(int *fd, char *infile, char *command, char **env)
+void	input_process(int *fd, char **argv, char **env)
 {
 	int		infile_fd;
 	pid_t	process_id;
 
+	input_check(argv, env);
 	process_id = fork();
 	if (process_id == -1)
 		error_type(FORK_ERROR);
 	if (process_id == 0)
 	{
 		close(fd[0]);
-		infile_fd = open_file(0, infile);
+		infile_fd = open_file(0, argv[1]);
 		dup2(infile_fd, STDIN_FILENO);
 		close(infile_fd);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		execute_command(command, env);
+		execute_command(argv[2], env);
 	}
 }
 
-void	output_process(int *fd, char *command, char *outfile, char **env)
+void	output_process(int *fd, char **argv, char **env)
 {
 	int		outfile_fd;
 	pid_t	process_id;
 
+	if ((cmd_validator(argv[2], env) == 1) && ft_strcmp(argv[3], "cat") == 1)
+		close_and_exit_with_error(0, 1);
+	if (cmd_validator(argv[3], env) == 1)
+		cmd_error(INVALID_COMMAND, argv[3]);
 	process_id = fork();
 	if (process_id == -1)
 		error_type(FORK_ERROR);
 	if (process_id == 0)
 	{
 		close(fd[1]);
-		outfile_fd = open_file(2, outfile);
+		outfile_fd = open_file(2, argv[4]);
 		dup2(outfile_fd, STDOUT_FILENO);
 		close(outfile_fd);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
-		execute_command(command, env);
+		execute_command(argv[3], env);
 	}
 }
 

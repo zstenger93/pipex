@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/02/04 09:33:48 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/04 09:55:59 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,10 @@ SRC = src/pipex.c \
 		src/utils.c \
 		src/errors.c \
 		src/input_check.c \
-		src/execute_command.c
+		src/execute_command.c \
 
-BONUS_SRC = 
+BONUS_SRC = src/bonus/here_doc.c \
+			src/bonus/pipex_bonus.c \
 
 OBJS = $(SRC:.c=.o)
 
@@ -62,7 +63,7 @@ $(NAME): $(LIBFT) $(OBJS)
 $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Bonus part By:$(DEF_COLOR) $(RED)zstenger $(DEF_COLOR)"
 	@echo "\x1B[1;36m"
-	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRCS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRC) $(LIBFT)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Bonus compiling done.$(DEF_COLOR)"
 
 %.o : %.c

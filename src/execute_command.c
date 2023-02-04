@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:24:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 09:46:24 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/04 11:48:32 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	execute_command(char *command, char **env)
 		env_path = get_env(env);
 		cmd_path = get_path(env_path, commands[0]);
 		if (cmd_path == NULL)
-			error_type(INVALID_COMMAND);
-		else if (execve(cmd_path, commands, env) != -1)
+			cmd_error(42, commands[0]);
+		if (execve(cmd_path, commands, env) != -1)
 			exit(-1);
 	}
 }
