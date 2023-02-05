@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 14:46:20 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/05 17:04:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **env)
 {
 	if (argc != 5)
 		error_type(WRONG_INPUT);
+	is_argv_valid(argc, argv);
 	pipex(argv, env);
 	exit(0);
 }
@@ -94,7 +95,7 @@ void	output_process(int *fd, char **argv, char **env, int error_id)
 	pid_t	process_id;
 
 	if ((error_id == 1) && is_cat(argv) == 1)
-		close_and_exit_with_error(0, 1);
+		nothing_to_cat(argv);
 	if (cmd_validator(argv[3], env) == FALSE)
 		cmd_error(INVALID_COMMAND, argv[3]);
 	else

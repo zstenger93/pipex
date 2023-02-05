@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 16:14:00 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/05 17:06:11 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,14 @@ int		path_check(char *cmd_path);
 void	execute_command(char *command, char **env);
 
 int		open_file(int fd, char *file);
-void	close_and_exit_with_error(int infile_fd, int outfile_fd);
+void	nothing_to_cat(char **argv);
 void	free_array(void **array);
 void	free_25(char *path, char **paths);
 int		is_cat(char **argv);
 int		path_with_bin_check(char **commands);
 int		no_such_file_or_folder(char *command);
+int		is_path_null(char *cmd_path, char *command, char **commands);
+void	is_argv_valid(int argc, char **argv);
+void	permission_denied(char **argv);
 
 #endif

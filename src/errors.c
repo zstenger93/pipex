@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 16:13:52 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:46:58 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,8 @@ int	cmd_validator(char *command, char **env)
 		{
 			env_path = get_env(env);
 			cmd_path = get_path(env_path, commands[0]);
-			if (cmd_path == NULL)
-			{
-				free_array((void **)commands);
-				free(cmd_path);
-				cmd_error(INVALID_COMMAND, command);
+			if (is_path_null(cmd_path, command, commands) == TRUE)
 				return (FALSE);
-			}
 			else if (access(cmd_path, X_OK) == TRUE)
 				free_array((void **)commands);
 			free(cmd_path);
@@ -85,13 +80,19 @@ int	path_with_bin_check(char **commands)
 				return (FALSE);
 		}
 		else if (no_such_file_or_folder(*commands) == FALSE)
-				return (FALSE);
+			return (FALSE);
 	}
 	return (TRUE);
 }
 
-int	no_such_file_or_folder(char *command)
+int	is_path_null(char *cmd_path, char *command, char **commands)
 {
-	ft_printf("./pipex: %s: %s\n", strerror(ENOENT), command);
+	if (cmd_path == NULL)
+	{
+		free_array((void **)commands);
+		free(cmd_path);
+		cmd_error(INVALID_COMMAND, command);
+		return (TRUE);
+	}
 	return (FALSE);
 }
