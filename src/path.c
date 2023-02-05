@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:23:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 11:21:37 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:45:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_env(char **env)
 	i = 0;
 	while (env[i] != NULL)
 	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
+		if (ft_strncmp(env[i], "PATH=", 5) == TRUE)
 			return (env[i] + 5);
 		i++;
 	}
@@ -41,12 +41,8 @@ char	*get_path(char *env_path, char *command)
 		path = ft_nm_strjoin(paths[i], slash_cmd);
 		free(slash_cmd);
 		if (path == NULL)
-		{
-			free(path);
-			free_array((void **)paths);
-			return (NULL);
-		}
-		if (access(path, X_OK) == 0)
+			return (free_25(path, paths), NULL);
+		else if (access(path, X_OK) == TRUE)
 		{
 			free_array((void **)paths);
 			return (path);
@@ -60,7 +56,7 @@ char	*get_path(char *env_path, char *command)
 
 int	path_check(char *cmd_path)
 {
-	if (cmd_path[0] == '/' && access(cmd_path, X_OK) == 0)
-		return (0);
-	return (1);
+	if (cmd_path[0] == '/' && access(cmd_path, X_OK) == TRUE)
+		return (TRUE);
+	return (FALSE);
 }

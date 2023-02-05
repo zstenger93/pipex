@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 12:04:10 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:13:52 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,57 @@ int	cmd_validator(char *command, char **env)
 	char	*env_path;
 
 	commands = ft_split(command, ' ');
-	if (path_check(commands[0]) == 0)
+	if (path_with_bin_check(commands) == TRUE)
 	{
-		free_array((void **)commands);
-		return (0);
-	}
-	else
-	{
-		env_path = get_env(env);
-		cmd_path = get_path(env_path, commands[0]);
-		if (cmd_path == NULL)
+		if (path_check(commands[0]) == TRUE)
+			free_array((void **)commands);
+		else
 		{
-			free_array((void **)commands);
+			env_path = get_env(env);
+			cmd_path = get_path(env_path, commands[0]);
+			if (cmd_path == NULL)
+			{
+				free_array((void **)commands);
+				free(cmd_path);
+				cmd_error(INVALID_COMMAND, command);
+				return (FALSE);
+			}
+			else if (access(cmd_path, X_OK) == TRUE)
+				free_array((void **)commands);
 			free(cmd_path);
-			return (1);
 		}
-		else if (access(cmd_path, X_OK) == 0)
-			free_array((void **)commands);
+		return (TRUE);
 	}
-	free(cmd_path);
-	return (0);
+	free_array((void **)commands);
+	return (FALSE);
+}
+
+int	path_with_bin_check(char **commands)
+{
+	if (*commands[0] == '/')
+	{
+		if (ft_strncmp(*commands, "/bin", 4) == 0)
+		{
+			if (path_check(commands[0]) == TRUE)
+				return (TRUE);
+			else if (no_such_file_or_folder(*commands) == FALSE)
+				return (FALSE);
+		}
+		if (ft_strncmp(*commands, "/usr/bin", 8) == 0)
+		{
+			if (path_check(commands[0]) == TRUE)
+				return (TRUE);
+			else if (no_such_file_or_folder(*commands) == FALSE)
+				return (FALSE);
+		}
+		else if (no_such_file_or_folder(*commands) == FALSE)
+				return (FALSE);
+	}
+	return (TRUE);
+}
+
+int	no_such_file_or_folder(char *command)
+{
+	ft_printf("./pipex: %s: %s\n", strerror(ENOENT), command);
+	return (FALSE);
 }

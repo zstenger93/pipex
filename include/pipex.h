@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 16:50:02 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:14:00 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <string.h>
 # include <fcntl.h>
 
+# define TRUE 0
+# define FALSE 1
+
 # define GIVE_PERM_WTH_RW 0644
 
 # define WRONG_INPUT 107
@@ -34,11 +37,11 @@
 void	error_type(int error_id);
 void	cmd_error(int error_id, char *command);
 int		cmd_validator(char *command, char **env);
-int	input_check(char **argv, char **env);
+int		input_check(char **argv, char **env);
 
 void	pipex(char **argv, char **env);
 void	input_process(int *fd, char **argv, char **env);
-void	output_process(int *fd, char **argv, char **env);
+void	output_process(int *fd, char **argv, char **env, int error_id);
 void	wait_for_child_process(void);
 
 char	*get_env(char **env);
@@ -49,5 +52,9 @@ void	execute_command(char *command, char **env);
 int		open_file(int fd, char *file);
 void	close_and_exit_with_error(int infile_fd, int outfile_fd);
 void	free_array(void **array);
+void	free_25(char *path, char **paths);
+int		is_cat(char **argv);
+int		path_with_bin_check(char **commands);
+int		no_such_file_or_folder(char *command);
 
 #endif

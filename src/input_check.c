@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 19:47:41 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:46:16 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	input_check(char **argv, char **env)
 	}
 	close(infile_fd);
 	close(outfile_fd);
-	if (cmd_validator(argv[2], env) == 1)
-		return (1);
-	return (0);
+	if (cmd_validator(argv[2], env) == FALSE)
+		return (FALSE);
+	return (TRUE);
 }
 
 void	close_and_exit_with_error(int infile_fd, int outfile_fd)
 {
-	close(infile_fd);
-	close(outfile_fd);
-	exit(1);
+	// close(infile_fd);
+	// close(outfile_fd);
+	exit(0);
 }
