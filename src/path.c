@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:23:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/04 19:30:57 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:21:37 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ char	*get_path(char *env_path, char *command)
 	{
 		slash_cmd = ft_nm_strjoin("/", command);
 		path = ft_nm_strjoin(paths[i], slash_cmd);
-		if (path == NULL)
-			return (NULL);
 		free(slash_cmd);
+		if (path == NULL)
+		{
+			free(path);
+			free_array((void **)paths);
+			return (NULL);
+		}
 		if (access(path, X_OK) == 0)
 		{
 			free_array((void **)paths);
@@ -50,7 +54,6 @@ char	*get_path(char *env_path, char *command)
 		i++;
 		free(path);
 	}
-	free(path);
 	free_array((void **)paths);
 	return (NULL);
 }
