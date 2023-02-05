@@ -83,6 +83,7 @@ _If you call fork() 3 times:_
 	<p>If it was open previously, it's closed before being reused and it is running automatically</p>
 	<p>Trying to use dup() and close() instead, could cause problems like, reuse of the fd between 2 proces</p>
 	<h2 align=center>Error handling</h2>
+	<p>Wrong amount of args</p>
 	<p>Empty arguments or with only spaces in the argument</p>
 	<p>Invalid infile</p>
 	<p>No cat if the first command invalid</p>
@@ -90,7 +91,6 @@ _If you call fork() 3 times:_
 	<p>Accepting commands with path as well, while checking if it's in /bin or /usr/bin</p>
 	<p>Wrong path check for the previous point</p>
 	<p>Correct returns as permission denied or no such file/folder etc.</p>
-
 </div>
 
 ### 📋 How pipes work:
