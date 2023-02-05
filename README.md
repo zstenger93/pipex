@@ -15,12 +15,12 @@ by using it in your program.</i></b><br>
 <h2 align=center>Allowed functions</h2>
 <p align=center>open, close, read, write, malloc, free, perror, strerror, access, dup,</p>
 <p align=center>dup2, execve, exit, fork, pipe, unlink, wait, waitpid, ft_printf</p>
-<h2>env</h2>
-<p>When used in a pipeline, env is used to pass specific environment variables to a command or process in the pipeline, allowing it to access those values and use them in its execution.</p>
+<h2 align=center>env</h2>
+<p align=center>When used in a pipeline, env is used to pass specific environment variables to a command or process in the pipeline, allowing it to access those values and use them in its execution.</p>
 <h2 align=center>pipe()</h2>
-<p>A pipe is a system call that creates a unidirectional communication link between two file descriptors</p>
-<p>First process output on the stdout becomes the second process input on stdin</p>
-<p>First process -> infile, second process -> outfile</p>
+<p align=center>A pipe is a system call that creates a unidirectional communication link between two file descriptors</p>
+<p align=center>First process output on the stdout becomes the second process input on stdin</p>
+<p align=center>First process -> infile, second process -> outfile</p>
 <h2 align=center>fork()</h2>
 <p align=center>It's creating a new process, which is called child process, which runs concurrently with the process that makes the fork() call (parent process).</p>
 <p align=center>After a new child process is created, both processes will execute the next instruction following the fork() system call. A child process uses the same pc(program counter), same CPU registers, same open files which use in the parent process.</p>
@@ -76,12 +76,22 @@ _If you call fork() 3 times:_
 	                    |  child_7  |
 	                    |___________|
 
-<h2>int dup2(int oldfd, int newfd);</h2>
-<p>Allocates for a new filedescriptor that refers to the old one</p>
-<p>Uses the given FD specified in newfd</p>
-<p>If it was open previously, it's closed before being reused and it is running automatically</p>
-<p>Trying to use dup() and close() instead, could cause problems like, reuse of the fd between 2 proces</p>
 <div align=center>
+	<h2>int dup2(int oldfd, int newfd);</h2>
+	<p>Allocates for a new filedescriptor that refers to the old one</p>
+	<p>Uses the given FD specified in newfd</p>
+	<p>If it was open previously, it's closed before being reused and it is running automatically</p>
+	<p>Trying to use dup() and close() instead, could cause problems like, reuse of the fd between 2 proces</p>
+	<h2 align=center>Error handling</h2>
+	<p>Empty arguments or with only spaces in the argument</p>
+	<p>Invalid infile</p>
+	<p>No cat if the first command invalid</p>
+	<p>Invalid commands</p>
+	<p>Accepting commands with path as well, while checking if it's in /bin or /usr/bin</p>
+	<p>Wrong path check for the previous point</p>
+	<p>Correct returns as permission denied or no such file/folder etc.</p>
+
+</div>
 
 ### 📋 How pipes work:
 _FYI:_
