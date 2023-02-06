@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:00 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 16:59:14 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:03:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	free_array(void **array)
 	free(array);
 }
 
+/*
+if the first arg invalid, and the second one is cat, dont run cat
+*/
 int	is_cat(char **argv)
 {
 	if ((ft_strcmp(argv[3], "cat")

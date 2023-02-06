@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 17:09:05 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:43:49 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@ int	input_check(char **argv, char **env)
 {
 	int		infile_fd;
 	int		outfile_fd;
-	char	*error;
 
 	infile_fd = open(argv[1], O_RDONLY);
 	outfile_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW);
 	if (infile_fd < 0)
-	{
-		error = strerror(errno);
-		ft_printf("%s: %s: %s\n", argv[0], error, argv[4]);
-	}
+		ft_printf("%s: %s: %s\n", argv[0], strerror(errno), argv[4]);
+	if (outfile_fd < 0)
+		ft_printf("%s: %s: %s\n", argv[0], strerror(errno), argv[4]);
 	close(infile_fd);
 	close(outfile_fd);
 	if (cmd_validator(argv[2], env) == FALSE)
@@ -34,7 +32,8 @@ int	input_check(char **argv, char **env)
 
 void	nothing_to_cat(char **argv)
 {
-	open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW);
+	if (open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW) < 0)
+		ft_printf("%s: %s: %s\n", argv[0], strerror(errno), argv[4]);
 	exit(0);
 }
 
@@ -62,9 +61,43 @@ void	is_argv_valid(int argc, char **argv)
 	}
 }
 
+//when the argument is empty
 void	permission_denied(char **argv)
 {
+	
 	ft_printf("./pipex: %s:\n", strerror(EACCES));
-	open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW);
+	if (open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW) < 0)
+		ft_printf("%s: %s: %s\n", argv[0], strerror(errno), argv[4]);
 	exit(0);
+}
+
+/*
+if the given command is exit then exit with the correct code
+*/
+int	is_exit_code(char **argv)
+{
+	char	*str;
+	int		len;
+	int		i;
+	char	*codestr;
+	int		code;
+
+	str = "exit ";
+	if (ft_strcmp(argv[3], "exit") == 1 && ft_strncmp(argv[3], "exit ", 5) != 0)
+	{
+		cmd_error(INVALID_COMMAND, "exit");
+		exit(INVALID_COMMAND);
+	}
+	else if (ft_strncmp(argv[3], str, 5) == 0)
+	{
+		i = 5;
+		len = ft_strlen(argv[3] + i);
+		codestr = (char *)malloc((len + 1) * sizeof(char));
+		strcpy(codestr, argv[3] + i);
+		code = ft_atoi(codestr);
+		free(codestr);
+		exit(code);
+	}
+	else
+		return (FALSE);
 }

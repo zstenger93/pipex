@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/02/04 09:55:59 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/06 14:45:24 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = src/pipex.c \
 		src/utils.c \
 		src/errors.c \
 		src/input_check.c \
+		src/open_command.c \
 		src/execute_command.c \
 
 BONUS_SRC = src/bonus/here_doc.c \

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 17:06:11 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:43:32 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		input_check(char **argv, char **env);
 void	pipex(char **argv, char **env);
 void	input_process(int *fd, char **argv, char **env);
 void	output_process(int *fd, char **argv, char **env, int error_id);
-void	wait_for_child_process(void);
+void	closefd_and_wait_for_child_process(int *filedescriptor);
 
 char	*get_env(char **env);
 char	*get_path(char *env_path, char *command);
@@ -59,5 +59,7 @@ int		no_such_file_or_folder(char *command);
 int		is_path_null(char *cmd_path, char *command, char **commands);
 void	is_argv_valid(int argc, char **argv);
 void	permission_denied(char **argv);
+int		is_exit_code(char **argv);
+int		check_open_for_failure(char **argv, int pick);
 
 #endif

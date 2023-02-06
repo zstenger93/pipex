@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 17:04:56 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:01:20 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,30 @@ close the filedescriptors and wait for the child processes to finish
 void	pipex(char **argv, char **env)
 {
 	int		filedescriptor[2];
-	char	*error;
-	int		cmd_error;
+	int		cmd_error_nb;
 
-	cmd_error = cmd_validator(argv[2], env);
+	cmd_error_nb = cmd_validator(argv[2], env);
 	if (pipe(filedescriptor) == -1)
 		error_type(PIPE_ERROR);
-	if (open(argv[1], O_RDONLY) == -1)
-	{
-		error = strerror(errno);
-		ft_printf("./pipex: %s: %s\n", error, argv[1]);
-	}
+	check_open_for_failure(argv, 1);
 	if (open(argv[1], O_RDONLY) != -1)
 	{
-		if (cmd_error == TRUE)
+		if (cmd_error_nb == TRUE)
 			input_process(filedescriptor, argv, env);
+		else
+			cmd_error(INVALID_COMMAND, argv[2]);
 	}
-	if (cmd_validator(argv[3], env) == TRUE)
-		output_process(filedescriptor, argv, env, cmd_error);
-	close(filedescriptor[0]);
-	close(filedescriptor[1]);
-	wait_for_child_process();
+	if (check_open_for_failure(argv, 2) == 0 && is_exit_code(argv) == FALSE)
+	{
+		if (cmd_validator(argv[3], env) == FALSE)
+		{
+			cmd_error(INVALID_COMMAND, argv[3]);
+			exit(INVALID_COMMAND);
+		}
+		else if (cmd_validator(argv[3], env) == TRUE)
+			output_process(filedescriptor, argv, env, cmd_error_nb);
+	}
+	closefd_and_wait_for_child_process(filedescriptor);
 }
 
 /*
@@ -96,8 +99,6 @@ void	output_process(int *fd, char **argv, char **env, int error_id)
 
 	if ((error_id == 1) && is_cat(argv) == 1)
 		nothing_to_cat(argv);
-	if (cmd_validator(argv[3], env) == FALSE)
-		cmd_error(INVALID_COMMAND, argv[3]);
 	else
 	{
 		process_id = fork();
@@ -116,11 +117,13 @@ void	output_process(int *fd, char **argv, char **env, int error_id)
 	}	
 }
 
-void	wait_for_child_process(void)
+void	closefd_and_wait_for_child_process(int *filedescriptor)
 {
 	int	process_id;
 	int	status;
 
+	close(filedescriptor[0]);
+	close(filedescriptor[1]);
 	process_id = waitpid(0, &status, 0);
 	while (process_id != -1)
 		process_id = waitpid(0, &status, 0);

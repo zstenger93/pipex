@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/05 16:46:58 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:18:42 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	cmd_error(int error_id, char *command)
 		close(0);
 	}
 	else if (error_id == 42)
-		free_array((void **)command);
+		ft_printf("./pipex: command not found: %s\n", command);
 }
 
 int	cmd_validator(char *command, char **env)
@@ -91,7 +91,6 @@ int	is_path_null(char *cmd_path, char *command, char **commands)
 	{
 		free_array((void **)commands);
 		free(cmd_path);
-		cmd_error(INVALID_COMMAND, command);
 		return (TRUE);
 	}
 	return (FALSE);
