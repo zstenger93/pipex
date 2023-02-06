@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/06 15:43:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:50:05 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	is_argv_valid(int argc, char **argv)
 	while (++j < argc - 1)
 	{
 		if (ft_strlen(argv[j]) == 0)
-			permission_denied(argv);
+			permission_denied(argv, argv[j], 0);
 		i = 0;
 		space = 0;
 		while (i < ft_strlen(argv[j]))
@@ -56,23 +56,31 @@ void	is_argv_valid(int argc, char **argv)
 				space++;
 			i++;
 		}
-		if (ft_strlen(argv[j]) == space)
-			permission_denied(argv);
+		if (ft_strlen(argv[j]) == space && argv[j])
+			permission_denied(argv, argv[j], 1);
 	}
 }
 
-//when the argument is empty
-void	permission_denied(char **argv)
+//when the argument is empty or have only space
+void	permission_denied(char **argv, char *command, int space)
 {
-	
-	ft_printf("./pipex: %s:\n", strerror(EACCES));
 	if (open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW) < 0)
 		ft_printf("%s: %s: %s\n", argv[0], strerror(errno), argv[4]);
+	if (space == 0)
+	{
+		ft_printf("./pipex: %s:\n", strerror(EACCES));
+		exit(0);
+	}
+	else if (space == 1)
+	{
+		ft_printf("./pipex: command not found: %s\n", command);
+		exit(INVALID_COMMAND);
+	}
 	exit(0);
 }
 
 /*
-if the given command is exit then exit with the correct code
+if the given command is exit -> exit with the correct code. check with: echo $?
 */
 int	is_exit_code(char **argv)
 {

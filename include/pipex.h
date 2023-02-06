@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/06 15:43:32 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:46:42 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		path_with_bin_check(char **commands);
 int		no_such_file_or_folder(char *command);
 int		is_path_null(char *cmd_path, char *command, char **commands);
 void	is_argv_valid(int argc, char **argv);
-void	permission_denied(char **argv);
+void	permission_denied(char **argv, char *command, int space);
 int		is_exit_code(char **argv);
 int		check_open_for_failure(char **argv, int pick);
 
