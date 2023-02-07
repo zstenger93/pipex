@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:36:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/07 18:23:50 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/07 21:06:56 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	open_file(int fd, char *file)
 
 	file_fd = -2;
 	if (fd == 0)
-		file_fd = open(file, O_RDONLY, GIVE_PERM_WTH_RW);
+		file_fd = open(file, O_RDONLY);
 	else if (fd == 1)
 		file_fd = open(file, O_WRONLY | O_CREAT | O_APPEND, GIVE_PERM_WTH_RW);
 	else if (fd == 2)
@@ -67,4 +67,21 @@ int	check_open_for_failure(char **argv, int pick)
 		}
 	}
 	return (0);
+}
+
+//does it start with ./ and ends with .sh?
+int	check_for_script(char *command)
+{
+	int	i;
+
+	i = 0;
+	if (command[i] == '.' && command[i + 1] == '/')
+	{
+		while (command[i] != '\0')
+			i++;
+		if (command[i - 1] == 'h' && command[i - 2] == 's'
+			&& command[i - 3] == '.')
+			return (TRUE);
+	}
+	return (FALSE);
 }

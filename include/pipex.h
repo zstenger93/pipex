@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/07 19:03:19 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/07 21:10:20 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	free_25(char *path, char **paths);
 
 //bonus extra error handling
 void	invalid_arg_heredoc(int argc, char **argv);
+int		check_for_script(char *command);
 
 void	pipex_bonus(int argc, char **argv, char **env);
 void	child_process(char *argv, char **env);

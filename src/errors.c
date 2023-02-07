@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/07 18:23:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/07 20:52:41 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int	cmd_validator(char *command, char **env)
 	char	*env_path;
 
 	commands = ft_split(command, ' ');
-	if (path_with_bin_check(commands) == TRUE)
+	if (check_for_script(command) == TRUE)
+		return (TRUE);
+	else if (path_with_bin_check(commands) == TRUE)
 	{
 		if (path_check(commands[0]) == TRUE)
 			free_array((void **)commands);

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:24:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/06 14:37:59 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/07 20:52:14 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	execute_command(char *command, char **env)
 	char	*env_path;
 
 	commands = ft_split(command, ' ');
-	if (path_check(commands[0]) == TRUE)
+	if (check_for_script(command) == TRUE)
+		execve(command, commands, env);
+	else if (path_check(commands[0]) == TRUE)
 	{
 		cmd_path = commands[0];
 		execve(cmd_path, commands, env);
