@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:36:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/07 21:06:56 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:42:54 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,39 @@ int	check_for_script(char *command)
 	int	i;
 
 	i = 0;
-	if (command[i] == '.' && command[i + 1] == '/')
+	while (command[i] != '\0')
+		i++;
+	if (command[0] == '.' && command[1] == '/')
 	{
-		while (command[i] != '\0')
-			i++;
-		if (command[i - 1] == 'h' && command[i - 2] == 's'
-			&& command[i - 3] == '.')
+		if (script_check_end(command, i) == TRUE)
+			return (TRUE);
+	}
+	else if (command[i - 1] == 'h' && command[i - 2] == 's'
+		&& command[i - 3] == '.')
+	{
+		if (ft_strrchr(command, '/') == NULL)
+			return (FALSE);
+		else if (access(command, X_OK) == TRUE)
+			return (TRUE);
+	}
+	return (FALSE);
+}
+
+//check for .sh files and if it has rights to execute
+int	script_check_end(char *command, int i)
+{
+	int	error;
+
+	if (command[i - 1] == 'h' && command[i - 2] == 's'
+		&& command[i - 3] == '.')
+	{
+		error = access(command, X_OK);
+		if (error < 0)
+		{
+			ft_printf("pipex: %s: %s\n", command, strerror(errno));
+			exit(0);
+		}
+		else
 			return (TRUE);
 	}
 	return (FALSE);

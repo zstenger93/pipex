@@ -6,12 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:00 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/07 21:06:52 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:40:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
+//for the splitted command
 void	free_array(void **array)
 {
 	int	i;
@@ -41,6 +42,7 @@ int	is_cat(char **argv)
 		return (0);
 }
 
+//love norm
 void	free_25(char *path, char **paths)
 {
 	free(path);

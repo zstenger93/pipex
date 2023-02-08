@@ -6,12 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/07 18:25:11 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:44:36 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
+//execute heredoc and exits when the limiter entered as input
 void	here_doc(char *limiter)
 {
 	pid_t	pid;

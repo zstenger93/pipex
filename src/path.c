@@ -6,12 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:23:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/07 20:13:29 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:42:08 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
+//get the start of path in env
 char	*get_env(char **env)
 {
 	int	i;
@@ -26,6 +27,7 @@ char	*get_env(char **env)
 	return (NULL);
 }
 
+//get the full path splitted at : and joined by /
 char	*get_path(char *env_path, char *command)
 {
 	int		i;
