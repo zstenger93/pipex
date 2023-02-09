@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/08 12:57:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/09 11:47:05 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	pipex(char **argv, char **env)
 doublecheck input mb not necessary
 fork(), if it fails return the error and exit
 if fails error
-infile as stdin
+set infile as stdin
 fd 2 as stdout
 execve
 */

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/08 16:38:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:06:22 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	free_array(void **array);
 void	free_25(char *path, char **paths);
 
 //bonus extra error handling
+void	too_few_arg(int argc);
 int		check_for_script(char *command);
 int		script_check_end(char *command, int i);
 void	invalid_arg_heredoc(int argc, char **argv);
@@ -77,5 +78,6 @@ void	close_dup_wait(int *filedescriptor);
 void	child_process(char *argv, char **env);
 void	pipex_bonus(int argc, char **argv, char **env);
 void	here_doc_here(int argc, char **argv, int cmd_i);
+void	final_cmd(char *command, char **env, int filedescriptor);
 
 #endif

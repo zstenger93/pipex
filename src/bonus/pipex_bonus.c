@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/07 18:26:20 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:06:34 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	main(int argc, char **argv, char **env)
 		}
 		while (cmd_index < argc - 2)
 			child_process(argv[cmd_index++], env);
-		dup2(outfile, STDOUT_FILENO);
-		execute_command(argv[argc - 2], env);
+		final_cmd(argv[argc - 2], env, outfile);
 	}
+	too_few_arg(argc);
 	exit(EXIT_SUCCESS);
 }
 
@@ -63,4 +63,30 @@ void	child_process(char *argv, char **env)
 		dup2(filedescriptor[0], STDIN_FILENO);
 		waitpid(pid, NULL, 0);
 	}
+}
+
+void	final_cmd(char *command, char **env, int filedescriptor)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		return ;
+	else if (pid == 0)
+	{
+		dup2(filedescriptor, STDOUT_FILENO);
+		close(filedescriptor);
+		execute_command(command, env);
+	}
+	else
+	{
+		close(STDIN_FILENO);
+		close(filedescriptor);
+	}
+}
+
+void	too_few_arg(int argc)
+{
+	if (argc < 5)
+		error_type(WRONG_INPUT);
 }

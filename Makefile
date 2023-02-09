@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/02/08 12:17:38 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/09 12:11:41 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ bonus: $(BONUS_NAME)
 $(NAME): $(LIBFT) $(OBJS)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger $(DEF_COLOR)"
 	@echo "$(CYAN2)"
-	$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(LIBFT)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
 	@echo "$(CYAN2) ██▓███▒░░▒██▒░ ██▓███▒░██████▒░▒██▒░▒██▒░"
 	@echo "▓██▒░░██▒░▒██▒░▓██▒░░██▒██▒░░░░░░▒██░██▒░"
@@ -60,8 +60,17 @@ $(NAME): $(LIBFT) $(OBJS)
 $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Bonus part By:$(DEF_COLOR) $(RED)zstenger $(DEF_COLOR)"
 	@echo "$(CYAN2)"
-	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRC) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRC) $(LIBFT)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Bonus compiling done.$(DEF_COLOR)"
+	@echo "$(RED) ██▓███▒░░▒██▒░ ██▓███▒░██████▒░▒██▒░▒██▒░"
+	@echo "▓██▒░░██▒░▒██▒░▓██▒░░██▒██▒░░░░░░▒██░██▒░"
+	@echo "▓██▒░██▓▒░▒██▒░▓██▒░██▓▒████▒░░░░░▒███▒░"
+	@echo "▒██▄█▓▒ ▒░▒██▒░▒██▄█▓▒ ▒██▒░░░░░░▒██░██▒░"
+	@echo "▒██▒ ░  ░░▒██▒░▒██▒ ░  ░██████▒░▒██▒░▒██▒░"
+	@echo "▒▓▒░ ░  ░░▒▓▓▒░▒▓▒░ ░ ░░░▒▓▓▓▓▒░ ▒▓▓▒ ▒▓▓▒"
+	@echo "░▒ ░      ░▒▒░ ░▒ ░  ░ ░  ░▒▒░   ░▒▒░ ░▒░"
+	@echo "░░         ░░  ░░      ░   ░░     ░░   ░"
+	@echo "░          ░   ░            ░     ░"
 
 %.o : %.c
 	@echo "$(CYAN2)"
@@ -71,21 +80,21 @@ $(LIBFT):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)LIBFT. $(DEF_COLOR)"
 	@echo "$(CYAN2)"
 #git submodule update --init --recursive --remote
-	make -C ./libft
+	@make -C ./libft
 	@echo "$(PURPLE)LIBFT $(DEF_COLOR)$(GREEN)has been compiled.$(DEF_COLOR)"
 
 clean:
 	@echo "$(RED)Deleting objects.$(DEF_COLOR)"
 	@echo "$(CYAN2)"
-	$(RM) $(OBJS) $(BONUS_OBJS)
-	make clean -C ./libft
+	@$(RM) $(OBJS) $(BONUS_OBJS)
+	@make clean -C ./libft
 	@echo "$(RED)Object files have been successfully removed!\n$(DEF_COLOR)"
 
 fclean: clean
 	@echo "$(RED)Deleting objects, executables and compiled libraries.$(DEF_COLOR)"
 	@echo "$(CYAN2)"
-	$(RM) $(NAME) $(BONUS_NAME)
-	make fclean -C ./libft
+	@$(RM) $(NAME) $(BONUS_NAME)
+	@make fclean -C ./libft
 	@echo "$(RED)\nAll executable, .o & .a files have been removed.$(DEF_COLOR)"
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/08 16:44:36 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:02:22 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	here_doc(char *limiter)
 
 void	here_doc_here(int argc, char **argv, int cmd_i)
 {
+	close(1);
 	if (argc > 5)
 	{
 		cmd_i = 3;
@@ -67,7 +68,6 @@ void	invalid_arg_heredoc(int argc, char **argv)
 	size_t	i;
 	size_t	space;
 
-	close(1);
 	j = 2;
 	while (++j < argc - 1)
 	{
