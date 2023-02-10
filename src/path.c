@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:23:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/08 16:42:08 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 10:37:51 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,29 @@ int	path_check(char *cmd_path)
 	if (cmd_path[0] == '/' && access(cmd_path, X_OK) == TRUE)
 		return (TRUE);
 	return (FALSE);
+}
+
+void	usage(char part)
+{
+	if (part == 'm')
+	{
+		ft_printf("\n\033[4;92mHow to use: ./pipex infile "
+			"\"cmd\" \"cmd1\" outfile\033[0;39m\n");
+		ft_printf("\n   \033[4;92mExample: ./pipex Makefile "
+			"\"cat\" \"cat\" out\033[0;39m\n\n");
+	}
+	if (part == 'b')
+	{
+		ft_printf("\n\033[4;92mHow to use: ./pipex_bonus infile "
+			"\"cmd\" \"cmd1\" \"cmd2\" \"cmd3\" outfile\033[0;39m\n");
+		ft_printf("\n    \033[4;92mExample: ./pipex_bonus Makefile "
+			"\"cat\" \"cat\" \"cat\" \"cat\" out\033[0;39m\n\n");
+	}
+	if (part == 'h')
+	{
+		ft_printf("\n\033[4;92mHow to use: ./pipex_bonus here_doc limiter "
+			"\"cmd\" \"cmd1\" outfile\033[0;39m\n");
+		ft_printf("\n     \033[4;92mExample: ./pipex_bonus here_doc stop "
+			"\"cat\" \"cat\" out\033[0;39m\n\n");
+	}
 }

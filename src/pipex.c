@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/09 11:47:05 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 10:15:58 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	main(int argc, char **argv, char **env)
 {
 	if (argc != 5)
+	{
+		usage('m');
 		error_type(WRONG_INPUT);
+	}
 	is_argv_valid(argc, argv);
 	pipex(argv, env);
 	exit(EXIT_SUCCESS);

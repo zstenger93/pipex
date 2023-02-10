@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/09 15:06:22 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 10:12:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	input_process(int *filedescriptor, char **argv, char **env);
 void	output_process(int *filedescriptor, char **argv, char **env, int e_id);
 
 //utils
+void	usage(char part);
 void	free_array(void **array);
 void	free_25(char *path, char **paths);
 
@@ -73,11 +74,11 @@ int		script_check_end(char *command, int i);
 void	invalid_arg_heredoc(int argc, char **argv);
 
 //bonus core part
-void	here_doc(char *limiter);
+void	here_doc(char *limiter, int argc);
 void	close_dup_wait(int *filedescriptor);
 void	child_process(char *argv, char **env);
 void	pipex_bonus(int argc, char **argv, char **env);
-void	here_doc_here(int argc, char **argv, int cmd_i);
+void	heredoc_process(char *limiter, int *filedescriptor);
 void	final_cmd(char *command, char **env, int filedescriptor);
 
 #endif

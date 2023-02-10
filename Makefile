@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/02/09 12:11:41 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/10 10:47:45 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ $(NAME): $(LIBFT) $(OBJS)
 	@echo "$(CYAN2)"
 	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(LIBFT)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
-	@echo "$(CYAN2) ██▓███▒░░▒██▒░ ██▓███▒░██████▒░▒██▒░▒██▒░"
+	@echo "$(CYAN3) ██▓███▒░░▒██▒░ ██▓███▒░██████▒░▒██▒░▒██▒░"
 	@echo "▓██▒░░██▒░▒██▒░▓██▒░░██▒██▒░░░░░░▒██░██▒░"
 	@echo "▓██▒░██▓▒░▒██▒░▓██▒░██▓▒████▒░░░░░▒███▒░"
 	@echo "▒██▄█▓▒ ▒░▒██▒░▒██▄█▓▒ ▒██▒░░░░░░▒██░██▒░"
@@ -79,7 +79,7 @@ $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
 $(LIBFT):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)LIBFT. $(DEF_COLOR)"
 	@echo "$(CYAN2)"
-#git submodule update --init --recursive --remote
+	@git submodule update --init --recursive --remote
 	@make -C ./libft
 	@echo "$(PURPLE)LIBFT $(DEF_COLOR)$(GREEN)has been compiled.$(DEF_COLOR)"
 
@@ -97,6 +97,12 @@ fclean: clean
 	@make fclean -C ./libft
 	@echo "$(RED)\nAll executable, .o & .a files have been removed.$(DEF_COLOR)"
 
+mvmem:
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./pipex Makefile "cat" "cat" out
+
+bvmem:
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./pipex_bonus Makefile "cat" "cat" "cat" "cat" "cat" "cat" "cat" "cat" "cat" "cat" "cat" "cat" out
+
 re: fclean all
 	@echo "$(RED)Files have been cleaned and project has been rebuilt!$(DEF_COLOR)"
 
@@ -104,6 +110,7 @@ DEF_COLOR = \033[0;39m
 RED = \033[1;4;91m
 GREEN = \033[4;92m
 CYAN = \033[1;96m
+CYAN3 = \033[1;4;96m
 YELLOW = \033[1;33m
 PURPLE = \033[1;35m
 BWhite = \033[1;37m

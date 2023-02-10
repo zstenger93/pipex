@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/09 15:06:34 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 10:21:15 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	main(int argc, char **argv, char **env)
 		invalid_arg_heredoc(argc, argv);
 		if (ft_strncmp(argv[1], "here_doc", 8) == TRUE)
 		{
+			cmd_index = 3;
 			outfile = open_file(1, argv[argc - 1]);
-			here_doc_here(argc, argv, cmd_index);
+			here_doc(argv[2], argc);
 		}
 		else
 		{
@@ -38,7 +39,6 @@ int	main(int argc, char **argv, char **env)
 		final_cmd(argv[argc - 2], env, outfile);
 	}
 	too_few_arg(argc);
-	exit(EXIT_SUCCESS);
 }
 
 void	child_process(char *argv, char **env)
@@ -88,5 +88,10 @@ void	final_cmd(char *command, char **env, int filedescriptor)
 void	too_few_arg(int argc)
 {
 	if (argc < 5)
+	{
+		usage('b');
 		error_type(WRONG_INPUT);
+	}
+	else
+		exit(EXIT_SUCCESS);
 }
