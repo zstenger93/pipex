@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 14:53:55 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:16:40 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **env)
 check the pipe, if it returns error, either way the entire system or
 the process has to many files open
 input and output process
-close the filedescriptors and wait for the child processes to finish
+close the filedescriptors and wait for the child proceso to finish
 */
 void	pipex(char **argv, char **env)
 {
@@ -62,10 +62,10 @@ void	pipex(char **argv, char **env)
 /*
 doublecheck input mb not necessary
 fork(), if it fails return the error and exit
-if fails error
-set infile as stdin
-fd 2 as stdout
-execve
+if we are in the child process (pid 0)
+close(0) open infile and make it as stdin
+make fd 1 as stdout
+execve the command
 */
 void	input_process(int *filedescriptor, char **argv, char **env)
 {
@@ -94,11 +94,8 @@ void	input_process(int *filedescriptor, char **argv, char **env)
 
 /*
 if the 1st command is not valid and the 3rd is cat close and exit
-close fd 1
-set outfile as stdout
-0 as stdin
-close 0
-execve
+if child process (pid 0) close(1) open the outfile and set it as stdout
+close outfile, make fd[0] as stdin, close(0), execute command
 */
 void	output_process(int *filedescriptor, char **argv, char **env, int e_id)
 {
@@ -123,4 +120,17 @@ void	output_process(int *filedescriptor, char **argv, char **env, int e_id)
 			execute_command(argv[3], env);
 		}
 	}	
+}
+
+//close fd's and wait for the child process to finish using -1
+void	closefd_and_wait_for_child_process(int *filedescriptor)
+{
+	int	process_id;
+	int	status;
+
+	close(filedescriptor[0]);
+	close(filedescriptor[1]);
+	process_id = waitpid(0, &status, 0);
+	while (process_id != -1)
+		process_id = waitpid(0, &status, 0);
 }

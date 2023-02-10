@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:00 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 14:54:03 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:04:49 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,4 @@ int	no_such_file_or_folder(char *command)
 {
 	ft_printf("./pipex: %s: %s\n", strerror(ENOENT), command);
 	return (FALSE);
-}
-
-void	closefd_and_wait_for_child_process(int *filedescriptor)
-{
-	int	process_id;
-	int	status;
-
-	close(filedescriptor[0]);
-	close(filedescriptor[1]);
-	process_id = waitpid(0, &status, 0);
-	while (process_id != -1)
-		process_id = waitpid(0, &status, 0);
 }
