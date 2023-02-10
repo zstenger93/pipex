@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 14:53:39 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:31:09 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	error_type(int error_id)
 	exit(EXIT_FAILURE);
 }
 
-//return if a command is invalid
+//used if a command is invalid
 void	cmd_error(int error_id, char *command)
 {
 	int	stdout_copy;

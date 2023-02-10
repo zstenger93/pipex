@@ -6,13 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:00 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 17:04:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:22:26 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-//for the splitted command
+//to free the splitted command
 void	free_array(void **array)
 {
 	int	i;
@@ -53,4 +53,30 @@ int	no_such_file_or_folder(char *command)
 {
 	ft_printf("./pipex: %s: %s\n", strerror(ENOENT), command);
 	return (FALSE);
+}
+
+//in case of wrong input, return how to use pipex
+void	usage(char part)
+{
+	if (part == 'm')
+	{
+		ft_printf("\n\033[4;92mHow to use: ./pipex infile "
+			"\"cmd\" \"cmd1\" outfile\033[0;39m\n");
+		ft_printf("\n   \033[4;92mExample: ./pipex Makefile "
+			"\"cat\" \"cat\" out\033[0;39m\n\n");
+	}
+	if (part == 'b')
+	{
+		ft_printf("\n\033[4;92mHow to use: ./pipex_bonus infile "
+			"\"cmd\" \"cmd1\" \"cmd2\" \"cmd3\" outfile\033[0;39m\n");
+		ft_printf("\n    \033[4;92mExample: ./pipex_bonus Makefile "
+			"\"cat\" \"cat\" \"cat\" \"cat\" out\033[0;39m\n\n");
+	}
+	if (part == 'h')
+	{
+		ft_printf("\n\033[4;92mHow to use: ./pipex_bonus here_doc limiter "
+			"\"cmd\" \"cmd1\" outfile\033[0;39m\n");
+		ft_printf("\n     \033[4;92mExample: ./pipex_bonus here_doc stop "
+			"\"cat\" \"cat\" out\033[0;39m\n\n");
+	}
 }

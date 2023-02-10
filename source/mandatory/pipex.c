@@ -6,12 +6,16 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 17:16:40 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:18:14 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
+/*
+return a message about usage and error if the arg count is wrong
+check the args for empty and only space arguments
+*/
 int	main(int argc, char **argv, char **env)
 {
 	if (argc != 5)
@@ -27,7 +31,9 @@ int	main(int argc, char **argv, char **env)
 /*
 check the pipe, if it returns error, either way the entire system or
 the process has to many files open
-input and output process
+if the file is correct and the command is valid -> input process
+if if the files are good and the command is not exit then
+check if the command is valid, if so execute
 close the filedescriptors and wait for the child proceso to finish
 */
 void	pipex(char **argv, char **env)

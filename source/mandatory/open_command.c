@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:36:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 14:53:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:24:39 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	check_for_script(char *command)
 	return (FALSE);
 }
 
-//check for .sh files and if it has rights to execute
+//check if the .sh file has rights to execute
 int	script_check_end(char *command, int i)
 {
 	int	error;

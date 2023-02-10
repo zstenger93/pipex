@@ -6,13 +6,16 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 14:53:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/10 18:34:18 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-//only in input process check for this and return error if needed
+/*
+open the infile and outfile to check and then close them
+check if the first command is valid or not
+*/
 int	input_check(char **argv, char **env)
 {
 	int		infile_fd;
