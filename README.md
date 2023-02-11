@@ -18,7 +18,7 @@ by using it in your program.</i></b><br>
 <h2 align=center>env</h2>
 <p align=center>When used in a pipeline, env is used to pass specific environment variables to a command or process in the pipeline, allowing it to access those values and use them in its execution.</p>
 <h2 align=center>pipe()</h2>
-<p align=center>A pipe is a system call that creates a unidirectional communication link between two file descriptors</p>
+<p align=center>A pipe is a system call that creates a unidirectional communication link between two parent and the new child process</p>
 <p align=center>First process output on the stdout becomes the second process input on stdin</p>
 <p align=center>First process -> infile, second process -> outfile</p>
 <h2 align=center>fork()</h2>
@@ -78,19 +78,39 @@ _If you call fork() 3 times:_
 
 <div align=center>
 	<h2>int dup2(int oldfd, int newfd);</h2>
-	<p>Allocates for a new filedescriptor that refers to the old one</p>
-	<p>Uses the given FD specified in newfd</p>
+	<p> is a system call in the C programming language that is used to duplicate a file descriptor. The call takes two arguments: an existing file descriptor (the original) and a new file descriptor number (the copy).</p>
+	<p>The new file descriptor is a copy of the original file descriptor, and it shares the same properties and underlying file table entry. Any changes made to the new file descriptor are reflected in the original file descriptor, and vice versa.d</p>
 	<p>If it was open previously, it's closed before being reused and it is running automatically</p>
 	<p>Trying to use dup() and close() instead, could cause problems like, reuse of the fd between 2 proces</p>
+	<h2>access()</h2>
+	<p>can check the path with X_OK to the command</p>
+	<h2>sterror()</h2>
+	<p>returns a specific error code the program exited with if an error occoured</p>
+	<h2>execve</h2>
+	<p>The call takes three arguments: the pathname of the program to be executed, an array of arguments for the program, and an array of environment variables for the program.</p>
+	<p>The execve() function replaces the current process image with the new process image, so that the new program runs in the same process as the calling program.</p>
+	<p>It is used when you want to run a program in place of the current process, without creating a new process. This is useful when you want to start a new program from a C program, or when you want to replace the current shell with a different shell.</p>
+	<h2>wait() & waitpid()</h2>
+	<p>Both can be used for waiting child processes and with waitpid you can wait for a specific one</p>
 	<h2 align=center>Error handling</h2>
 	<p>Wrong amount of args</p>
 	<p>Empty arguments or with only spaces in the argument</p>
-	<p>Invalid infile</p>
+	<p>Invalid infile or outfile</p>
 	<p>No cat if the first command invalid</p>
 	<p>Invalid commands</p>
 	<p>Accepting commands with path as well, while checking if it's in /bin or /usr/bin</p>
 	<p>Wrong path check for the previous point</p>
 	<p>Correct returns as permission denied or no such file/folder etc.</p>
+	<p>Dircet path check</p>
+	<p>check for exit command</p>
+	<p>fork error</p>
+	<p>if first arg invalid and second is cat</p>
+	<p>checking for script files</p>
+</div>
+<div align=center>
+<h2>Bonus</h2>
+<p>heredoc</p>
+<p>handling multiple commands</p>
 </div>
 
 ### 📋 How pipes work:
