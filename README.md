@@ -77,7 +77,7 @@ _If you call fork() 3 times:_
 	                    |___________|
 
 <div align=center>
-	<h2>int dup2(int oldfd, int newfd);</h2>
+	<h2>dup2()</h2>
 	<p> is a system call in the C programming language that is used to duplicate a file descriptor. The call takes two arguments: an existing file descriptor (the original) and a new file descriptor number (the copy).</p>
 	<p>The new file descriptor is a copy of the original file descriptor, and it shares the same properties and underlying file table entry. Any changes made to the new file descriptor are reflected in the original file descriptor, and vice versa.d</p>
 	<p>If it was open previously, it's closed before being reused and it is running automatically</p>
