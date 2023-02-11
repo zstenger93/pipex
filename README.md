@@ -76,10 +76,37 @@ _If you call fork() 3 times:_
 	                    |  child_7  |
 	                    |___________|
 
+_If you call fork() 4 times:_
+
+
+                                                  |-----------|
+                                                  |  child_8  |
+                                                  |___________|
+                                                       |
+                                                       |
+         |-----------|       |-----------|       |-----------|        |-----------|       |-----------|
+     	 |  child_12 |<------|  child_4  |<------|  parent   |------->|  child_2  |------>|  child_6  |
+	     |___________|       |___________|       |___________|        |___________|       |___________|
+	                                                	|                       |                 |
+	                                                	|                       |                 |
+	   |-----------|       |-----------|       |-----------|               |-----------|       |-----------|
+	   |  child_13  |<------|  child_5  |<------|  child_1  |______        |  child_10 |       |  child_14 |
+	   |___________|       |___________|       |___________|      |        |___________|       |___________|
+	                                        	|                 |
+	                                        	|               |-----------|
+	                |-----------|       |-----------|           |  child_9  |
+	                |  child_11 |<------|  child_3  |           |___________|
+	                |___________|       |___________|
+	 						                   	|
+						                    	|
+                                      |-----------|      |-----------|
+                                      |  child_7  |----->|  child_15 |
+	                                  |___________|      |___________|
+
 <div align=center>
 	<h2>dup2()</h2>
 	<p> is a system call in the C programming language that is used to duplicate a file descriptor. The call takes two arguments: an existing file descriptor (the original) and a new file descriptor number (the copy).</p>
-	<p>The new file descriptor is a copy of the original file descriptor, and it shares the same properties and underlying file table entry. Any changes made to the new file descriptor are reflected in the original file descriptor, and vice versa.d</p>
+	<p>The new file descriptor is a copy of the original file descriptor, and it shares the same properties and underlying file table entry. Any changes made to the new file descriptor are reflected in the original file descriptor, and vice versa.</p>
 	<p>If it was open previously, it's closed before being reused and it is running automatically</p>
 	<p>Trying to use dup() and close() instead, could cause problems like, reuse of the fd between 2 proces</p>
 	<h2>access()</h2>
