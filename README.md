@@ -31,7 +31,7 @@ by using it in your program.</i></b><br>
 _If you call fork() once:_
 
 	|-----------|
-	|  parent   |
+	|  PARENT   |
 	|___________|
 		|
 		|
@@ -41,9 +41,9 @@ _If you call fork() once:_
 
 _If you call fork() twice:_
 
-	|-----------|
-	|  parent   |-------------->|
-	|___________|               |
+    |-----------|
+    |  PARENT   |___________
+    |___________|           |
 		|                   |
 		|                   |
 	|-----------|       |-----------|
@@ -58,7 +58,7 @@ _If you call fork() twice:_
 _If you call fork() 3 times:_
 
 	|-----------|       |-----------|
-	|  Child_4  |<------|  parent   |---------->|
+	|  Child_4  |<------|  PARENT   |___________
 	|___________|       |___________|           |
 	                    	|                   |
 	                    	|                   |
