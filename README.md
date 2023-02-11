@@ -27,7 +27,6 @@ by using it in your program.</i></b><br>
 <p align=center>Negative Value: creation of a child process was unsuccessful.<p>
 <p align=center>Zero: Returned to the newly created child process.<p>
 <p align=center>Positive value: Returned to parent or caller. The value contains process ID of newly created child process.<p>
-<div align=center>
 
 _If you call fork() once:_
 
@@ -104,7 +103,6 @@ _If you call fork() 4 times:_
                                       |  Child_7  |----->|  Child_15 |
                                       |___________|      |___________|
 
-</div>
 <div align=center>
 	<h2>dup2()</h2>
 	<p> is a system call in the C programming language that is used to duplicate a file descriptor. The call takes two arguments: an existing file descriptor (the original) and a new file descriptor number (the copy).</p>
