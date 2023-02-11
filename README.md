@@ -79,9 +79,9 @@ _If you call fork() 3 times:_
 _If you call fork() 4 times:_
 
 
-                                              |-----------|
-                                              |  Child_8  |
-                                              |___________|
+                                            |-----------|
+                                            |  Child_8  |
+                                            |___________|
                                                    |
                                                    |
     |-----------|       |-----------|       |-----------|        |-----------|       |-----------|
@@ -138,18 +138,17 @@ _If you call fork() 4 times:_
 <h2>Bonus</h2>
 <p>heredoc</p>
 <p>handling multiple commands</p>
-</div>
+<h2>🛠️Usage🛠️</h2>
 
-### 📋 How pipes work:
-_FYI:_
+```shell
+./pipex infile "cmd" "cmd1" outfile
+```
 
-	Dunno yet :]
+```shell
+./pipex_bonus infile "cmd" "cmd1" "cmd2" "cmd3" "cmd4" outfile
+```
 
-### 📋 Mandatory:
-
-### 📋 Bonus:
-
-### 🛠️ Usage:
-
-### 🛠️ Testing:
+```shell
+./pipex_bonus here_doc stop "cmd" "cmd1" outfile
+```
 </div>
