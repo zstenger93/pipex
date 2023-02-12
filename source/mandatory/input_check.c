@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 18:34:18 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:55:48 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	is_argv_valid(int argc, char **argv)
 		space = 0;
 		while (i < ft_strlen(argv[j]))
 		{
-			if (argv[j][i] == ' ')
+			if (argv[j][i] == ' ' || argv[j][i] == '\t')
 				space++;
 			i++;
 		}
@@ -85,7 +85,7 @@ void	permission_denied(char **argv, char *command, int space, int argc)
 	}
 	else if (space == 1)
 	{
-		ft_printf("pipex: command not found: %s\n", command);
+		ft_printf("pipex: command not found: %s \n", command);
 		exit(0);
 	}
 	exit(EXIT_FAILURE);

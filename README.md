@@ -18,7 +18,8 @@ by using it in your program.</i></b><br>
 <h2 align=center>env</h2>
 <p align=center>When used in a pipeline, env is used to pass specific environment variables to a command or process in the pipeline, allowing it to access those values and use them in its execution.</p>
 <h2 align=center>pipe()</h2>
-<p align=center>A pipe is a system call that creates a unidirectional communication link between two parent and the new child process</p>
+<p align=center>A pipe is a system call that creates a unidirectional communication link between two process</p>
+<p align=center>system call creates a pair of file descriptors, a read-end and a write-end, that are connected to each other so that data written to the write-end of the pipe is read from the read-end of the pipe.</p>
 <p align=center>First process output on the stdout becomes the second process input on stdin</p>
 <p align=center>First process -> infile, second process -> outfile</p>
 <h2 align=center>fork()</h2>
