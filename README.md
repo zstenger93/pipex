@@ -22,6 +22,27 @@ by using it in your program.</i></b><br>
 <p align=center>system call creates a pair of file descriptors, a read-end and a write-end, that are connected to each other so that data written to the write-end of the pipe is read from the read-end of the pipe.</p>
 <p align=center>First process output on the stdout becomes the second process input on stdin</p>
 <p align=center>First process -> infile, second process -> outfile</p>
+
+_Pipeline_
+
+            |---------|
+            | PIPE(); |
+            |_________|
+             /       \
+            /         \
+          fd0         fd1
+            |---------|
+            | FORK(); |
+            |_________|
+              /     \
+             /       \
+            /         \
+    |--------|       |-------|
+    | PARENT |       | CHILD |
+    |________|       |_______|
+      /    \           /    \
+    fd0    fd1        fd0   fd1
+
 <h2 align=center>fork()</h2>
 <p align=center>It's creating a new process, which is called child process, which runs concurrently with the process that makes the fork() call (parent process).</p>
 <p align=center>After a new child process is created, both processes will execute the next instruction following the fork() system call. A child process uses the same pc(program counter), same CPU registers, same open files which use in the parent process.</p>
