@@ -6,13 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:00 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 18:22:26 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/12 11:06:12 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-//to free the splitted command
+//to free the splitted command before exit
 void	free_array(void **array)
 {
 	int	i;
@@ -28,9 +28,7 @@ void	free_array(void **array)
 	free(array);
 }
 
-/*
-if the first arg invalid, and the second one is cat, dont run cat
-*/
+//if the first arg invalid, and the second one is cat, dont run cat
 int	is_cat(char **argv)
 {
 	if ((ft_strcmp(argv[3], "cat")

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/11 17:48:13 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:11:32 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc >= 5)
 	{
 		cmd_index = 2;
-		invalid_arg_heredoc(argc, argv);
+		invalid_arg_heredoc(argc, argv, env);
 		if (ft_strncmp(argv[1], "here_doc", 8) == TRUE)
 		{
 			cmd_index = 3;

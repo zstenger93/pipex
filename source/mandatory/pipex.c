@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/11 07:50:12 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:04:53 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char **argv, char **env)
 {
+	does_the_path_exist(argv, env, 'm');
 	if (argc != 5)
 	{
 		usage('m');
@@ -55,7 +56,6 @@ void	pipex(char **argv, char **env)
 }
 
 /*
-doublecheck files & cmd
 if we are in the child process (pid 0)
 close(0) open infile and make it as stdin
 make fd 1 as stdout
@@ -86,7 +86,6 @@ void	input_process(int *filedescriptor, char **argv, char **env)
 }
 
 /*
-if the 1st command is not valid and the 3rd is cat close and exit
 if child process (pid 0) close(1) open the outfile and set it as stdout
 close outfile, make fd[0] as stdin, close(0), execute command
 */
@@ -115,7 +114,11 @@ void	output_process(int *filedescriptor, char **argv, char **env, int e_id)
 	}	
 }
 
-//close fd's and wait for the child process to finish using -1
+/*
+close and wait for all child processes
+status sores the exit status of the child proc.
+if the return is -1, there is no more process to wait for
+*/
 void	closefd_and_wait_for_child_process(int *filedescriptor)
 {
 	int	pid;

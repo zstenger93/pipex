@@ -6,13 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:23:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 18:20:45 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:15:16 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-//get the start of path in env
+//get the start of path from env
 char	*get_env(char **env)
 {
 	int	i;
@@ -25,6 +25,29 @@ char	*get_env(char **env)
 		i++;
 	}
 	return (NULL);
+}
+
+void	does_the_path_exist(char **argv, char **env, char type)
+{
+	if (type == 'm')
+	{
+		if (get_env(env) == NULL && check_for_script(argv[2]) == FALSE
+			&& check_for_script(argv[3]) == FALSE)
+		{
+			ft_printf("\033[1;91mThe PATH environmental "
+				"variable is not set.\n\033[0;39m");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else if (type == 'b')
+	{
+		if (get_env(env) == NULL)
+		{
+			ft_printf("\033[1;91mThe PATH environmental "
+				"variable is not set.\n\033[0;39m");
+			exit(EXIT_FAILURE);
+		}
+	}
 }
 
 //get the full path splitted at : and joined by /
