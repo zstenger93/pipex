@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/12 13:11:32 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:40:50 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,19 @@ int	main(int argc, char **argv, char **env)
 			dup2(infile, STDIN_FILENO);
 		}
 		while (cmd_index < argc - 2)
-			child_process(argv[cmd_index++], env);
-		final_cmd(argv[argc - 2], env, outfile);
+			child_process(argv, argc, argv[cmd_index++], env);
+		final_cmd(argv, argc, env, outfile);
 	}
 	too_few_arg(argc);
 }
 
-void	child_process(char *argv, char **env)
+void	child_process(char **argv, int argc, char *command, char **env)
 {
 	pid_t	pid;
 	int		filedescriptor[2];
 
+	if (cmd_validator(command, env) == FALSE)
+		cmd_error(INVALID_COMMAND, command);
 	if (pipe(filedescriptor) == -1)
 		error_type(PIPE_ERROR);
 	pid = fork();
@@ -55,7 +57,8 @@ void	child_process(char *argv, char **env)
 	{
 		close(filedescriptor[0]);
 		dup2(filedescriptor[1], STDOUT_FILENO);
-		execute_command(argv, env);
+		can_we_execute(argv, argc, command, env);
+		execute_command(command, env);
 	}
 	else
 	{
@@ -65,7 +68,7 @@ void	child_process(char *argv, char **env)
 	}
 }
 
-void	final_cmd(char *command, char **env, int filedescriptor)
+void	final_cmd(char **argv, int argc, char **env, int filedescriptor)
 {
 	pid_t	pid;
 
@@ -76,7 +79,8 @@ void	final_cmd(char *command, char **env, int filedescriptor)
 	{
 		dup2(filedescriptor, STDOUT_FILENO);
 		close(filedescriptor);
-		execute_command(command, env);
+		can_we_execute(argv, argc, argv[argc - 2], env);
+		execute_command(argv[argc - 2], env);
 	}
 	else
 	{
@@ -94,4 +98,32 @@ void	too_few_arg(int argc)
 	}
 	else
 		exit(EXIT_SUCCESS);
+}
+
+void	can_we_execute(char **argv, int argc, char *command, char **env)
+{
+	static int	i = 2;
+
+	while (argv[i] != command)
+		i++;
+	if (cmd_validator(command, env) == FALSE && command != argv[argc - 1])
+	{
+		while (i < argc - 1)
+		{
+			if (ft_strncmp(argv[i], "ls", 2) == TRUE
+				|| ft_strncmp(argv[i], "pwd", 3) == TRUE
+				|| ft_strncmp(argv[i], "env", 3) == TRUE
+				|| ft_strncmp(argv[i], "man", 3) == TRUE
+				|| ft_strncmp(argv[i], "echo", 4) == TRUE
+				|| ft_strncmp(argv[i], "history", 7) == TRUE
+				|| ft_strncmp(argv[i], "sleep", 5) == TRUE
+				|| ft_strncmp(argv[i], "which", 5) == TRUE
+				|| ft_strncmp(argv[i], "wait", 4) == TRUE
+				|| ft_strncmp(argv[i], "printenv", 8) == TRUE
+				|| ft_strncmp(argv[i], "exit", 4) == TRUE)
+				execute_command(argv[i], env);
+			i++;
+		}
+		cannot_execute_quit(argv, argc, command);
+	}
 }

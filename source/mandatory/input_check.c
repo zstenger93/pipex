@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/11 13:55:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:06:32 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ void	nothing_to_cat(char **argv)
 //check for empty and only space filled arguments
 void	is_argv_valid(int argc, char **argv)
 {
-	int		j;
-	size_t	i;
-	size_t	space;
+	static int	j = 1;
+	size_t		i;
+	size_t		space;
 
-	j = 1;
 	while (++j < argc - 1)
 	{
 		if (ft_strlen(argv[j]) == 0)

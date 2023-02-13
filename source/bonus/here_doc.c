@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:19 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/12 13:10:49 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:07:25 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,14 @@ void	close_dup_wait(int *filedescriptor)
 //check for empty and only space filled arguments
 void	invalid_arg_heredoc(int argc, char **argv, char **env)
 {
-	int		j;
-	size_t	i;
-	size_t	space;
+	static int	j = 2;
+	size_t		i;
+	size_t		space;
 
 	does_the_path_exist(argv, env, 'b');
-	j = 2;
 	while (++j < argc - 1)
 	{
-		if (ft_strlen(argv[3]) == 0 && ft_strncmp(argv[1], "here_doc", 8) == 0)
+		if (ft_strlen(argv[j]) == 0 && ft_strncmp(argv[1], "here_doc", 8) == 0)
 			permission_denied(argv, argv[j], 0, argc);
 		else if (ft_strlen(argv[j - 1]) == 0)
 			permission_denied(argv, argv[j], 0, argc);
