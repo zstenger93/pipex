@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:23:59 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/12 13:15:16 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/13 07:52:28 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	does_the_path_exist(char **argv, char **env, char type)
 	}
 }
 
-//get the full path splitted at : and joined by /
+//get the full path splitted at : and command with /
 char	*get_path(char *env_path, char *command)
 {
 	int		i;
