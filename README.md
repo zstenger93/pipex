@@ -155,6 +155,7 @@ _If you call fork() 4 times:_
 	<p>fork error</p>
 	<p>if first arg invalid and second is cat</p>
 	<p>checking for script files</p>
+	<p>commands not depending on the prev command, after an invalid command should work in bonus</p>
 </div>
 <div align=center>
 <h2>Bonus</h2>
