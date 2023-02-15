@@ -140,7 +140,7 @@ _If you call fork() 4 times:_
 	<p>The execve() function replaces the current process image with the new process image, so that the new program runs in the same process as the calling program.</p>
 	<p>It is used when you want to run a program in place of the current process, without creating a new process. This is useful when you want to start a new program from a C program, or when you want to replace the current shell with a different shell.</p>
 	<h2>wait() & waitpid()</h2>
-	<p>Both can be used for waiting child processes and with waitpid you can wait for a specific one</p>
+	<p>Both can be used for waiting child processes and with waitpid you can wait for a specific one and can use -1 to wait untill all process finsh</p>
 	<h2 align=center>Error handling</h2>
 	<p>Wrong amount of args</p>
 	<p>Empty arguments or with only spaces in the argument</p>
