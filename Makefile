@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/02/24 16:13:19 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/24 16:17:53 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 $(LIBFT):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)LIBFT. $(DEF_COLOR)"
 	@echo "$(CYAN2)" $(DN)
-#@git submodule update --init --recursive --remote $(DN)
+	@git submodule update --init --recursive --remote $(DN)
 	@make -C ./libft $(DN)
 	@echo "$(PURPLE)LIBFT $(DEF_COLOR)$(GREEN)has been compiled.$(DEF_COLOR)"
 
