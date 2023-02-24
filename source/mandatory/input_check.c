@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/13 19:06:32 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:57:21 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	input_check(char **argv, char **env)
 	return (TRUE);
 }
 
+//when the cmd before cat is invalid then:
 void	nothing_to_cat(char **argv)
 {
 	if (open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW) < 0)

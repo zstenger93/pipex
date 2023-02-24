@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/02/13 19:47:25 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/24 16:13:19 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,36 +17,41 @@ RM = rm -rf
 LIBFT = libft/libft.a
 CFLAGS = -Wall -Werror -Wextra
 DN = > /dev/null
+SRC_DIR = source/
+OBJ_DIR = objects/
 
-SRC = source/mandatory/pipex.c \
-		source/mandatory/path.c \
-		source/mandatory/utils.c \
-		source/mandatory/errors.c \
-		source/mandatory/input_check.c \
-		source/mandatory/open_command.c \
-		source/mandatory/execute_command.c \
+SRC = mandatory/pipex \
+		mandatory/path \
+		mandatory/utils \
+		mandatory/errors \
+		mandatory/input_check \
+		mandatory/open_command \
+		mandatory/cmd_validator \
+		mandatory/execute_command \
 
-BONUS_SRC = source/bonus/here_doc.c \
-			source/mandatory/path.c \
-			source/mandatory/utils.c \
-			source/mandatory/errors.c \
-			source/bonus/pipex_bonus.c \
-			source/mandatory/input_check.c \
-			source/mandatory/open_command.c \
-			source/mandatory/execute_command.c \
+BONUS_SRC = bonus/here_doc \
+			mandatory/path \
+			mandatory/utils \
+			mandatory/errors \
+			bonus/pipex_bonus \
+			mandatory/input_check \
+			mandatory/open_command \
+			mandatory/cmd_validator \
+			mandatory/execute_command \
 
-OBJS = $(SRC:.c=.o)
-
-BONUS_OBJS = $(BONUS_SRC:.c=.o)
+SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC)))
+OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
+BONUS_SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(BONUS_SRC)))
+BONUS_OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(BONUS_SRC)))
 
 all: $(NAME)
 
 bonus: $(BONUS_NAME)
-	
+
 $(NAME): $(LIBFT) $(OBJS)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Mandatory part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
 	@echo "$(CYAN2)" $(DN)
-	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(LIBFT) $(DN)
+	@$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -o $(NAME) $(DN)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Compiling done.$(DEF_COLOR)"
 	@echo "$(CYAN3) ██▓███▒░░▒██▒░ ██▓███▒░██████▒░▒██▒░▒██▒░"
 	@echo "▓██▒░░██▒░▒██▒░▓██▒░░██▒██▒░░░░░░▒██░██▒░"
@@ -65,7 +70,7 @@ $(NAME): $(LIBFT) $(OBJS)
 $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(PURPLE)$(NAME) Bonus part By:$(DEF_COLOR) $(RED)zstenger$(DEF_COLOR)"
 	@echo "$(CYAN2)" $(DN)
-	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRC) $(LIBFT) $(DN)
+	@$(CC) $(CFLAGS) $(LIBFT) $(BONUS_OBJS) -o $(BONUS_NAME) $(DN)
 	@echo "$(PURPLE)$(NAME) $(DEF_COLOR)$(GREEN)Bonus compiling done.$(DEF_COLOR)"
 	@echo "$(RED) ██▓███▒░░▒██▒░ ██▓███▒░██████▒░▒██▒░▒██▒░"
 	@echo "▓██▒░░██▒░▒██▒░▓██▒░░██▒██▒░░░░░░▒██░██▒░"
@@ -81,14 +86,16 @@ $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
 	@echo ""
 	@echo ""
 
-%.o : %.c
-	@echo "$(CYAN2)" $(DN)
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/mandatory/
+	@mkdir -p $(OBJ_DIR)/bonus/
 	@$(CC) $(CFLAGS) -c $< -o $@ $(DN)
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling: $(DEF_COLOR)$(CYAN)LIBFT. $(DEF_COLOR)"
 	@echo "$(CYAN2)" $(DN)
-	@git submodule update --init --recursive --remote $(DN)
+#@git submodule update --init --recursive --remote $(DN)
 	@make -C ./libft $(DN)
 	@echo "$(PURPLE)LIBFT $(DEF_COLOR)$(GREEN)has been compiled.$(DEF_COLOR)"
 
@@ -96,19 +103,20 @@ clean:
 	@echo "$(CYAN)CLEAN$(DEF_COLOR)"
 	@echo "$(RED)Deleting objects.$(DEF_COLOR)"
 	@echo "$(CYAN2)" $(DN)
-	@$(RM) $(OBJS) $(BONUS_OBJS) $(DN)
+	@$(RM) $(OBJ_DIR) $(BONUS_OBJS) $(DN)
 	@make clean -C ./libft $(DN)
 	@echo "$(RED)Object files have been successfully removed!$(DEF_COLOR)"
 
-fclean: clean
+fclean:
+	@make clean $(DN)
 	@echo "$(CYAN)FCLEAN$(DEF_COLOR)"
-	@echo "$(RED)Deleting objects, executables and compiled libraries.$(DEF_COLOR)"
+	@echo "$(RED)Deleting objects, executables.$(DEF_COLOR)"
 	@echo "$(CYAN2)" $(DN)
 	@$(RM) $(NAME) $(BONUS_NAME) $(DN)
 	@make fclean -C ./libft $(DN)
 	@$(RM) pipex.dSYM $(DN)
 	@$(RM) pipex_bonus.dSYM $(DN)
-	@echo "$(RED)All executable, .o & .a files have been removed.$(DEF_COLOR)"
+	@echo "$(RED)Executable and object files have been successfully removed.$(DEF_COLOR)"
 
 mvmem:
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-limit=no --tool=memcheck ./pipex Makefile "cat" "cat" out

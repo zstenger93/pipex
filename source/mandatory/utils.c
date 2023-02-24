@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:00 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/12 11:06:12 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:19:41 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ void	free_25(char *path, char **paths)
 {
 	free(path);
 	free_array((void **)paths);
-}
-
-int	no_such_file_or_folder(char *command)
-{
-	ft_printf("./pipex: %s: %s\n", strerror(ENOENT), command);
-	return (FALSE);
 }
 
 //in case of wrong input, return how to use pipex

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/12 12:46:48 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/24 12:19:46 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,69 +40,22 @@ void	cmd_error(int error_id, char *command)
 	}
 }
 
-//check for valid commands with direct path else looking thru the folders
-int	cmd_validator(char *command, char **env)
+void	cannot_execute_quit(char **argv, int argc, char *command)
 {
-	char	**commands;
-	char	*cmd_path;
-	char	*env_path;
+	int	i;
 
-	commands = ft_split(command, ' ');
-	if (check_for_script(command) == TRUE)
-		return (TRUE);
-	else if (path_with_bin_check(commands) == TRUE)
+	i = argc - 1;
+	if (ft_strncmp(argv[0], "./pipex_bonus", 13) == TRUE)
 	{
-		if (path_check(commands[0]) == TRUE)
-			free_array((void **)commands);
-		else
-		{
-			env_path = get_env(env);
-			cmd_path = get_path(env_path, commands[0]);
-			if (is_path_null(cmd_path, commands) == TRUE)
-				return (FALSE);
-			else if (access(cmd_path, X_OK) == TRUE)
-				free_array((void **)commands);
-			free(cmd_path);
-		}
-		return (TRUE);
+		if (open(argv[i], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW) < 0)
+			ft_printf("pipex: %s: %s\n", argv[4], strerror(errno));
+		cmd_error(INVALID_COMMAND, command);
+		exit(INVALID_COMMAND);
 	}
-	free_array((void **)commands);
-	return (FALSE);
 }
 
-//direct path check for commands
-int	path_with_bin_check(char **commands)
+int	no_such_file_or_folder(char *command)
 {
-	if (*commands[0] == '/')
-	{
-		if (ft_strncmp(*commands, "/bin", 4) == 0)
-		{
-			if (path_check(commands[0]) == TRUE)
-				return (TRUE);
-			else if (no_such_file_or_folder(*commands) == FALSE)
-				return (FALSE);
-		}
-		if (ft_strncmp(*commands, "/usr/bin", 8) == 0)
-		{
-			if (path_check(commands[0]) == TRUE)
-				return (TRUE);
-			else if (no_such_file_or_folder(*commands) == FALSE)
-				return (FALSE);
-		}
-		else if (no_such_file_or_folder(*commands) == FALSE)
-			return (FALSE);
-	}
-	return (TRUE);
-}
-
-//check if there is no path
-int	is_path_null(char *cmd_path, char **commands)
-{
-	if (cmd_path == NULL)
-	{
-		free_array((void **)commands);
-		free(cmd_path);
-		return (TRUE);
-	}
+	ft_printf("./pipex: %s: %s\n", strerror(ENOENT), command);
 	return (FALSE);
 }
