@@ -6,7 +6,7 @@
 #    By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/29 18:32:33 by zstenger          #+#    #+#              #
-#    Updated: 2023/02/25 10:29:03 by zstenger         ###   ########.fr        #
+#    Updated: 2023/02/25 11:01:15 by zstenger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,9 +87,7 @@ $(BONUS_NAME): $(LIBFT) $(BONUS_OBJS)
 	@echo ""
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/mandatory/
-	@mkdir -p $(OBJ_DIR)/bonus/
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@ $(DN)
 
 $(LIBFT):
