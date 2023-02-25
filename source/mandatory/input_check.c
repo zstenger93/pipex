@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/24 12:57:21 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/25 09:13:44 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,7 @@ int	is_exit_code(char **argv)
 
 	str = "exit ";
 	if (ft_strcmp(argv[3], "exit") == 1 && ft_strncmp(argv[3], "exit ", 5) != 0)
-	{
-		cmd_error(INVALID_COMMAND, "exit");
-		exit(INVALID_COMMAND);
-	}
+		exit(130);
 	else if (ft_strncmp(argv[3], str, 5) == 0)
 	{
 		i = 5;
