@@ -6,15 +6,15 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/25 09:13:44 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:50:23 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
 /*
-open the infile and outfile to check and then close them
-check if the first command is valid or not
+	open the infile and outfile to check and then close them
+	check if the first command is valid or not
 */
 int	input_check(char **argv, char **env)
 {
@@ -92,7 +92,8 @@ void	permission_denied(char **argv, char *command, int space, int argc)
 }
 
 /*
-if the given command is exit -> exit with the correct code. check with: echo $?
+	if the given command is exit -> exit with the correct code.
+	check with: echo $?
 */
 int	is_exit_code(char **argv)
 {

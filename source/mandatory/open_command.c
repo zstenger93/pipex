@@ -6,17 +6,16 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:36:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/10 18:24:39 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:53:31 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
 /*
-open R only, if doesnt exist open it with read and write permissions
-open WR only, created if doesnt exist and new data should be appended to the
-end of file open WR only, created if doesnt exist and its content should be
-removed if open return -1 print the error specified in errno
+	open existing file
+	open/create file to append to the end of file
+	open/create file and clean it's content before writing to it
 */
 int	open_file(int fd, char *file)
 {
@@ -38,8 +37,8 @@ int	open_file(int fd, char *file)
 }
 
 /*
-infile check
-outfile check
+	infile check
+	outfile check
 */
 int	check_open_for_failure(char **argv, int pick)
 {

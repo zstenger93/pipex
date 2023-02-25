@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/13 19:40:50 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:49:09 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,11 @@ void	too_few_arg(int argc)
 		exit(EXIT_SUCCESS);
 }
 
+/*
+	if there is a wrong command,
+	checks if the rest can be executed without that one,
+	if so then it executes the command
+*/
 void	can_we_execute(char **argv, int argc, char *command, char **env)
 {
 	static int	i = 2;

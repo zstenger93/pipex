@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/13 19:07:06 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:53:58 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	pipex(char **argv, char **env)
 }
 
 /*
-if we are in the child process (pid 0)
-close(0) open infile and make it as stdin
-make fd 1 as stdout
+	if we are in the child process (pid 0)
+	close(0) open infile and make it as stdin
+	make fd 1 as stdout
 */
 void	input_process(int *filedescriptor, char **argv, char **env)
 {
@@ -86,8 +86,8 @@ void	input_process(int *filedescriptor, char **argv, char **env)
 }
 
 /*
-if child process (pid 0) close(1) open the outfile and set it as stdout
-close outfile, make fd[0] as stdin, close(0), execute command
+	if child process (pid 0) close(1) open the outfile and set it as stdout
+	close outfile, make fd[0] as stdin, close(0), execute command
 */
 void	output_process(int *filedescriptor, char **argv, char **env, int e_id)
 {
@@ -115,9 +115,9 @@ void	output_process(int *filedescriptor, char **argv, char **env, int e_id)
 }
 
 /*
-close and wait for all child processes
-status sores the exit status of the child proc.
-if the return is -1, there is no more process to wait for
+	close and wait for all child processes
+	status sores the exit status of the child proc.
+	if the return is -1, there is no more process to wait for
 */
 void	closefd_and_wait_for_child_process(int *filedescriptor)
 {
