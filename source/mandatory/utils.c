@@ -6,14 +6,14 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:00 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/24 12:19:41 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:20:38 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
 //to free the splitted command before exit
-void	free_array(void **array)
+void	free_array(char **array)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ int	is_cat(char **argv)
 void	free_25(char *path, char **paths)
 {
 	free(path);
-	free_array((void **)paths);
+	free_array(paths);
 }
 
 //in case of wrong input, return how to use pipex

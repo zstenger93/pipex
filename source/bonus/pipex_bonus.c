@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 09:54:05 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/25 16:49:09 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:33:25 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int	main(int argc, char **argv, char **env)
 			dup2(infile, STDIN_FILENO);
 		}
 		while (cmd_index < argc - 2)
-			child_process(argv, argc, argv[cmd_index++], env);
+			pipex_bonus(argv, argc, argv[cmd_index++], env);
 		final_cmd(argv, argc, env, outfile);
 	}
 	too_few_arg(argc);
 }
 
-void	child_process(char **argv, int argc, char *command, char **env)
+void	pipex_bonus(char **argv, int argc, char *command, char **env)
 {
 	pid_t	pid;
 	int		filedescriptor[2];
@@ -118,6 +118,7 @@ void	can_we_execute(char **argv, int argc, char *command, char **env)
 			if (ft_strncmp(argv[i], "ls", 2) == TRUE
 				|| ft_strncmp(argv[i], "pwd", 3) == TRUE
 				|| ft_strncmp(argv[i], "env", 3) == TRUE
+				|| ft_strncmp(argv[i], "export", 6) == TRUE
 				|| ft_strncmp(argv[i], "man", 3) == TRUE
 				|| ft_strncmp(argv[i], "echo", 4) == TRUE
 				|| ft_strncmp(argv[i], "history", 7) == TRUE

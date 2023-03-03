@@ -6,17 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:36:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/25 16:53:31 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:28:21 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-/*
-	open existing file
-	open/create file to append to the end of file
-	open/create file and clean it's content before writing to it
-*/
+//open the file we need, if it fails, return the the error
 int	open_file(int fd, char *file)
 {
 	int		file_fd;
@@ -31,15 +27,12 @@ int	open_file(int fd, char *file)
 	if (file_fd == -1)
 	{
 		ft_printf("pipex: %s: %s\n", file, strerror(errno));
-		exit(errno);
+		exit(0);
 	}
 	return (file_fd);
 }
 
-/*
-	infile check
-	outfile check
-*/
+//check if the files can be opened or not
 int	check_open_for_failure(char **argv, int pick)
 {
 	int	stdout_copy;
@@ -54,6 +47,7 @@ int	check_open_for_failure(char **argv, int pick)
 			close(1);
 			dup(stdout_copy);
 			close(stdout_copy);
+			return (-1);
 		}
 		return (0);
 	}

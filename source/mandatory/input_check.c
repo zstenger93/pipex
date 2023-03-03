@@ -6,16 +6,13 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:12 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/25 16:50:23 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:08:08 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-/*
-	open the infile and outfile to check and then close them
-	check if the first command is valid or not
-*/
+//open the infile and outfile to check and then close them
 int	input_check(char **argv, char **env)
 {
 	int		infile_fd;
@@ -45,10 +42,11 @@ void	nothing_to_cat(char **argv)
 //check for empty and only space filled arguments
 void	is_argv_valid(int argc, char **argv)
 {
-	static int	j = 1;
-	size_t		i;
-	size_t		space;
+	int		j;
+	size_t	i;
+	size_t	space;
 
+	j = 1;
 	while (++j < argc - 1)
 	{
 		if (ft_strlen(argv[j]) == 0)
@@ -91,10 +89,7 @@ void	permission_denied(char **argv, char *command, int space, int argc)
 	exit(EXIT_FAILURE);
 }
 
-/*
-	if the given command is exit -> exit with the correct code.
-	check with: echo $?
-*/
+//if the given command is exit -> exit with the right code. check with: echo $?
 int	is_exit_code(char **argv)
 {
 	char	*str;

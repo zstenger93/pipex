@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:31:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/25 16:53:58 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:17:15 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ void	pipex(char **argv, char **env)
 	cmd_error_nb = cmd_validator(argv[2], env);
 	if (pipe(filedescriptor) == -1)
 		error_type(PIPE_ERROR);
-	check_open_for_failure(argv, 1);
-	if (open(argv[1], O_RDONLY) != -1)
+	if (check_open_for_failure(argv, 1) == 0)
 	{
-		if (cmd_error_nb == TRUE)
+		if (cmd_error_nb == 0 && open(argv[1], O_RDONLY) != -1)
 			input_process(filedescriptor, argv, env);
 		else
 			cmd_error(INVALID_COMMAND, argv[2]);
@@ -52,14 +51,10 @@ void	pipex(char **argv, char **env)
 		else if (cmd_validator(argv[3], env) == TRUE)
 			output_process(filedescriptor, argv, env, cmd_error_nb);
 	}
-	closefd_and_wait_for_child_process(filedescriptor);
+	closefd_and_wait_for_process(filedescriptor);
 }
 
-/*
-	if we are in the child process (pid 0)
-	close(0) open infile and make it as stdin
-	make fd 1 as stdout
-*/
+//child -> close(0), open infile, make it as stdin, make 1 as stdout, exec
 void	input_process(int *filedescriptor, char **argv, char **env)
 {
 	int		infile;
@@ -85,10 +80,7 @@ void	input_process(int *filedescriptor, char **argv, char **env)
 	}
 }
 
-/*
-	if child process (pid 0) close(1) open the outfile and set it as stdout
-	close outfile, make fd[0] as stdin, close(0), execute command
-*/
+//child -> close (1) open outfile, make it as stdout, make 0 as stdin, exec
 void	output_process(int *filedescriptor, char **argv, char **env, int e_id)
 {
 	int		outfile;
@@ -114,12 +106,8 @@ void	output_process(int *filedescriptor, char **argv, char **env, int e_id)
 	}	
 }
 
-/*
-	close and wait for all child processes
-	status sores the exit status of the child proc.
-	if the return is -1, there is no more process to wait for
-*/
-void	closefd_and_wait_for_child_process(int *filedescriptor)
+//close fd's, wait for all process to finish with -1(<-no more process)
+void	closefd_and_wait_for_process(int *filedescriptor)
 {
 	int	pid;
 	int	status;

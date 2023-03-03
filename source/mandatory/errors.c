@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:32:07 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/24 12:19:46 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:58:40 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cannot_execute_quit(char **argv, int argc, char *command)
 	if (ft_strncmp(argv[0], "./pipex_bonus", 13) == TRUE)
 	{
 		if (open(argv[i], O_WRONLY | O_CREAT | O_TRUNC, GIVE_PERM_WTH_RW) < 0)
-			ft_printf("pipex: %s: %s\n", argv[4], strerror(errno));
+			ft_printf("pipex: %s: %s\n", argv[i], strerror(errno));
 		cmd_error(INVALID_COMMAND, command);
 		exit(INVALID_COMMAND);
 	}

@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 12:16:20 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/24 12:17:19 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:17:35 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	cmd_validator(char *command, char **env)
 	else if (path_with_bin_check(commands) == TRUE)
 	{
 		if (path_check(commands[0]) == TRUE)
-			free_array((void **)commands);
+			free_array(commands);
 		else
 		{
 			env_path = get_env(env);
@@ -33,12 +33,12 @@ int	cmd_validator(char *command, char **env)
 			if (is_path_null(cmd_path, commands) == TRUE)
 				return (FALSE);
 			else if (access(cmd_path, X_OK) == TRUE)
-				free_array((void **)commands);
+				free_array(commands);
 			free(cmd_path);
 		}
 		return (TRUE);
 	}
-	free_array((void **)commands);
+	free_array(commands);
 	return (FALSE);
 }
 
@@ -47,7 +47,7 @@ int	is_path_null(char *cmd_path, char **commands)
 {
 	if (cmd_path == NULL)
 	{
-		free_array((void **)commands);
+		free_array(commands);
 		free(cmd_path);
 		return (TRUE);
 	}

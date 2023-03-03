@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:24:58 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/12 11:28:01 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:18:15 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	execute_command(char *command, char **env)
 		cmd_path = get_path(env_path, commands[0]);
 		if (cmd_path == NULL)
 		{
-			free_array((void **)commands);
+			free_array(commands);
 			free(cmd_path);
 		}
 		else if (access(cmd_path, X_OK) == TRUE)

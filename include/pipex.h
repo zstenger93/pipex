@@ -6,7 +6,7 @@
 /*   By: zstenger <zstenger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 18:28:02 by zstenger          #+#    #+#             */
-/*   Updated: 2023/02/13 19:45:18 by zstenger         ###   ########.fr       */
+/*   Updated: 2023/03/02 10:55:08 by zstenger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,22 @@
 # define PIPEX_H
 
 # include "../libft/includes/libft.h"
-
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <errno.h>
 # include <string.h>
+# include <stdio.h>
+# include <errno.h>
 # include <fcntl.h>
-
-# define TRUE 0
-# define FALSE 1
 
 # define GIVE_PERM_WTH_RW 0644
 # define INVALID_COMMAND 127
-
-# define WRONG_INPUT 107
-# define PIPE_ERROR 108
 # define PROCESS_ERROR 109
 # define CHILD_ERROR 110
+# define WRONG_INPUT 107
+# define PIPE_ERROR 108
 # define FORK_ERROR 111
+# define FALSE 1
+# define TRUE 0
 
 //error handling
 int		is_cat(char **argv);
@@ -65,21 +62,20 @@ char	*get_path(char *env_path, char *command);
 int		open_file(int fd, char *file);
 void	pipex(char **argv, char **env);
 void	execute_command(char *command, char **env);
-void	closefd_and_wait_for_child_process(int *filedescriptor);
+void	closefd_and_wait_for_process(int *filedescriptor);
 void	input_process(int *filedescriptor, char **argv, char **env);
 void	output_process(int *filedescriptor, char **argv, char **env, int e_id);
 
 //utils
 void	usage(char part);
-void	free_array(void **array);
+void	free_array(char **array);
 void	free_25(char *path, char **paths);
 
 //bonus core part
 void	here_doc(char *limiter, int argc);
 void	close_dup_wait(int *filedescriptor);
-void	pipex_bonus(int argc, char **argv, char **env);
 void	heredoc_process(char *limiter, int *filedescriptor);
-void	child_process(char **argv, int argc, char *command, char **env);
+void	pipex_bonus(char **argv, int argc, char *command, char **env);
 void	final_cmd(char **argv, int argc, char **env, int filedescriptor);
 
 #endif
